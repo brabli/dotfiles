@@ -6,6 +6,7 @@ These files contain my config for the following programs:
 
 - Neovim
 - Tmux
+- Lazygit
 
 # Installation
 
