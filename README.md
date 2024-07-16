@@ -5,6 +5,7 @@ All the cool kids have a dotfiles repository, so as a cool kid myself I found it
 These files contain my config for the following programs:
 
 - Neovim
+- Vim
 - Tmux
 - Lazygit
 
