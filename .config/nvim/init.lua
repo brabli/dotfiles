@@ -1,6 +1,12 @@
 -- BG: Lua guide
 -- https://neovim.io/doc/user/lua-guide.html
 
+-- vim.filetype.add({
+--     extension = {
+--         twig = "html",
+--     },
+-- })
+
 vim.opt.cindent = true
 
 -- Set <space> as the leader key
