@@ -1,11 +1,22 @@
 -- BG: Lua guide
 -- https://neovim.io/doc/user/lua-guide.html
 
--- vim.filetype.add({
---     extension = {
---         twig = "html",
---     },
--- })
+vim.filetype.add({
+    extension = {
+        log = "log",
+        conf = "conf",
+        env = "sh",
+    },
+
+    filename = {
+        [".env"] = "sh",
+    },
+
+    pattern = {
+        -- Match filenames like - ".env.example", ".env.local" and so on
+        ["%.env%.[%w_.-]+"] = "sh",
+    },
+})
 
 vim.opt.cindent = true
 
@@ -161,6 +172,7 @@ require("lazy").setup("plugins", {
 })
 
 require("leap").create_default_mappings()
+-- require("luasnip").filetype_extend("twig", { "html" })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
