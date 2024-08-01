@@ -184,6 +184,8 @@ return {
                 },
             },
 
+            tsserver = {},
+
             lua_ls = {
                 -- cmd = {...},
                 -- filetypes = { ...},
