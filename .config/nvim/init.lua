@@ -174,5 +174,17 @@ require("lazy").setup("plugins", {
 require("leap").create_default_mappings()
 -- require("luasnip").filetype_extend("twig", { "html" })
 
+-- Turning this off is required for getting php-cs-fixer to add a newline at the end of PHP files
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*.php",
+    callback = function()
+        vim.opt.eol = false
+        vim.cmd("se noeol")
+        -- vim.cmd("se nofixeol")
+        print("BufEnter")
+    end,
+    group = vim.api.nvim_create_augroup("php_eol", { clear = true }),
+})
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
