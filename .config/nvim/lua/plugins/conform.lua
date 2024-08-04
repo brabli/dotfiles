@@ -12,12 +12,12 @@ return { -- Autoformat
         },
     },
     opts = {
-        notify_on_error = false,
+        notify_on_error = true,
         format_on_save = function(bufnr)
             -- Disable "format_on_save lsp_fallback" for languages that don't
             -- have a well standardized coding style. You can add additional
             -- languages here or re-enable it for the disabled ones.
-            local disable_filetypes = { c = true, cpp = true }
+            local disable_filetypes = { c = true, cpp = true, php = true }
             return {
                 timeout_ms = 500,
                 lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -25,12 +25,25 @@ return { -- Autoformat
         end,
         formatters_by_ft = {
             lua = { "stylua" },
+            php = { "php-cs-fixer" },
             -- Conform can also run multiple formatters sequentially
             -- python = { "isort", "black" },
             --
             -- You can use a sub-list to tell conform to run *until* a formatter
             -- is found.
-            -- javascript = { { "prettierd", "prettier" } },
+            javascript = { { "prettierd", "prettier" } },
+        },
+        formatters = {
+            ["php-cs-fixer"] = {
+                command = "php-cs-fixer",
+                args = {
+                    "fix",
+                    "$FILENAME",
+                    "--config=app/.php-cs-fixer.dist.php",
+                    "--allow-risky=yes", -- if you have risky stuff in config, if not you dont need it.
+                },
+                stdin = false,
+            },
         },
     },
 }
