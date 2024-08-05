@@ -184,6 +184,8 @@ return {
                 },
             },
 
+            tailwindcss = {},
+
             tsserver = {},
 
             lua_ls = {
@@ -216,6 +218,7 @@ return {
         vim.list_extend(ensure_installed, {
             "stylua",
             "php-cs-fixer",
+            "tailwindcss",
         })
         require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
