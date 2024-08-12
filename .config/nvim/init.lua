@@ -3,18 +3,18 @@
 
 vim.filetype.add({
     extension = {
-        log = "log",
-        conf = "conf",
-        env = "sh",
+        -- log = "log",
+        -- conf = "conf",
     },
 
     filename = {
-        [".env"] = "sh",
+        ["symfony.lock"] = "json",
     },
 
     pattern = {
         -- Match filenames like - ".env.example", ".env.local" and so on
-        ["%.env%.[%w_.-]+"] = "sh",
+        [".+%.env%.[%w_.-]+"] = "sh",
+        [".+%.ya?ml%.[%w]+"] = "yaml",
     },
 })
 
@@ -174,7 +174,7 @@ require("lazy").setup("plugins", {
 -- require("leap").create_default_mappings()
 -- require("luasnip").filetype_extend("twig", { "html" })
 
-require("lualine").setup()
+require("lualine").setup({})
 
 -- Turning this off is required for getting php-cs-fixer to add a newline at the end of PHP files
 vim.api.nvim_create_autocmd("BufEnter", {
