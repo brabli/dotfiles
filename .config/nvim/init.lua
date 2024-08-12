@@ -171,8 +171,10 @@ require("lazy").setup("plugins", {
     -- other settings
 })
 
-require("leap").create_default_mappings()
+-- require("leap").create_default_mappings()
 -- require("luasnip").filetype_extend("twig", { "html" })
+
+require("lualine").setup()
 
 -- Turning this off is required for getting php-cs-fixer to add a newline at the end of PHP files
 vim.api.nvim_create_autocmd("BufEnter", {
