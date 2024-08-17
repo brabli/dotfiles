@@ -15,6 +15,7 @@ vim.filetype.add({
         -- Match filenames like - ".env.example", ".env.local" and so on
         [".+%.env%.[%w_.-]+"] = "sh",
         [".+%.ya?ml%.[%w]+"] = "yaml",
+        [".+%.neon"] = "yaml", -- Neon files are similar to yaml
     },
 })
 
