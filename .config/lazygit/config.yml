@@ -1,5 +1,10 @@
 gui:
     nerdFontsVersion: "3"
+    showRandomTip: false
+    showFileTree: false
+    showListFooter: false
+    showPanelJumps: false
+    filterMode: fuzzy
     theme:
         activeBorderColor:
             - '#4F8FF8'
@@ -20,11 +25,8 @@ gui:
             - '#cdd6f4'
         searchingActiveBorderColor:
             - '#f9e2af'
-
         authorColors:
             '*': '#b4befe'
-
-        filterMode: fuzzy
 os:
     editPreset: nvim
 
