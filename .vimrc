@@ -1,3 +1,6 @@
+" Make Catppuccin theme work
+set termguicolors
+
 " Set numbers
 set rnu
 set nu
@@ -27,7 +30,7 @@ set laststatus=2
 filetype on
 syntax on
 
-colorscheme sorbet
+colorscheme catppuccin_mocha
 
 " Change cursor depending on the mode.
 " Not sure how this will fare outside of MacOS and iTerm2.
