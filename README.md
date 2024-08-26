@@ -8,6 +8,7 @@ These files contain my config for the following programs:
 - Vim
 - Tmux
 - Lazygit
+- Git
 
 # Installation
 
