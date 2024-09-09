@@ -7,3 +7,7 @@
 	editor = nvim
 [init]
 	defaultBranch = main
+
+[alias]
+	b = branch
+	p = pull --rebase
