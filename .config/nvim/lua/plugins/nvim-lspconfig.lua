@@ -199,8 +199,6 @@ return {
 
             tailwindcss = {},
 
-            tsserver = {},
-
             lua_ls = {
                 -- cmd = {...},
                 -- filetypes = { ...},
@@ -232,6 +230,7 @@ return {
             "stylua",
             "php-cs-fixer",
             "tailwindcss",
+            "rust-analyzer",
         })
         require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
