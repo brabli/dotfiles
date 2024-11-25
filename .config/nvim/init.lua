@@ -184,7 +184,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.opt.eol = false
         vim.cmd("se noeol")
         -- vim.cmd("se nofixeol")
-        print("BufEnter")
     end,
     group = vim.api.nvim_create_augroup("php_eol", { clear = true }),
 })
