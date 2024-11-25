@@ -188,7 +188,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("php_eol", { clear = true }),
 })
 
-vim.keymap.set("n", "<leader>rn", ":IncRename ")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
