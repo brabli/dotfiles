@@ -1,3 +1,22 @@
+local function getPhpCsConfigFile()
+    local path1 = "app/.php-cs-fixer.dist.php"
+    local path2 = ".php-cs-fixer.dist.php"
+
+    local file = io.open(path1, "r")
+    if file then
+        file:close()
+        return path1
+    else
+        file = io.open(path2, "r")
+        if file then
+            file:close()
+            return path2
+        else
+            return ''
+        end
+    end
+end
+
 return { -- Autoformat
     "stevearc/conform.nvim",
     lazy = false,
@@ -39,7 +58,7 @@ return { -- Autoformat
                 args = {
                     "fix",
                     "$FILENAME",
-                    "--config=app/.php-cs-fixer.dist.php",
+                    "--config=" .. getPhpCsConfigFile(),
                     "--allow-risky=yes", -- if you have risky stuff in config, if not you dont need it.
                 },
                 stdin = false,
