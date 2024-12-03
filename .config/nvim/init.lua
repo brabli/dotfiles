@@ -1,6 +1,16 @@
 -- BG: Lua guide
 -- https://neovim.io/doc/user/lua-guide.html
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "lua",
+    callback = function()
+        vim.bo.expandtab = true -- Convert tabs to spaces
+        vim.bo.tabstop = 3 -- How many spaces a tab counts for
+        vim.bo.softtabstop = 3 -- Number of spaces to use when expanding tabs
+        vim.bo.shiftwidth = 3 -- Number of spaces to use for each step of (auto)indent
+    end,
+})
+
 vim.filetype.add({
     extension = {
         -- log = "log",
