@@ -12,7 +12,7 @@ local function getPhpCsConfigFile()
             file:close()
             return path2
         else
-            return ''
+            return ""
         end
     end
 end
