@@ -15,7 +15,7 @@ return {
         require("oil").setup({
             columns = {
                 "icon",
-                "permissions",
+                -- "permissions",
                 -- "size",
                 -- "mtime",
             },
@@ -49,11 +49,12 @@ return {
         })
 
         -- Open parent directory in current window
-        vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+        -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
         -- vim.keymap.set("n", "<esc>", require("oil").close)
 
         -- Open parent directory in floating window
-        vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+        -- vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+        vim.keymap.set("n", "-", require("oil").toggle_float)
     end,
 }
