@@ -200,17 +200,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 require("lspconfig").tailwindcss.setup({
    -- There add every filetype you want tailwind to work on
    filetypes = {
-      "css",
-      "scss",
-      "sass",
-      "postcss",
-      "html",
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "svelte",
-      "vue",
       "rust",
    },
    init_options = {
@@ -229,14 +218,6 @@ require("lspconfig").tailwindcss.setup({
          },
       },
    },
-   -- Here If any of files from list will exist tailwind lsp will activate.
-   root_dir = require("lspconfig").util.root_pattern(
-      "tailwind.config.js",
-      "tailwind.config.ts",
-      "postcss.config.js",
-      "postcss.config.ts",
-      "windi.config.ts"
-   ),
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
