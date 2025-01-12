@@ -197,6 +197,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
    group = vim.api.nvim_create_augroup("php_eol", { clear = true }),
 })
 
+-- This config gets Tailwind working with Dioxus
 require("lspconfig").tailwindcss.setup({
    filetypes = {
       "rust",
