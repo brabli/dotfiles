@@ -227,24 +227,12 @@ require("lspconfig").tailwindcss.setup({
          rust = "html",
       },
    },
-   tailwindCSS = {
-      experimental = {
-         class_regex = {
-            'class: "(.*)"',
-            'class:%s*".*"',
-         },
-      },
-   },
    settings = {
       tailwindCSS = {
          experimental = {
             classRegex = {
                'class: "(.*)"',
                'class:%s*".*"',
-               [[class= "([^"]*)]],
-               [[class: "([^"]*)]],
-               '~H""".*class="([^"]*)".*"""',
-               '~F""".*class="([^"]*)".*"""',
             },
          },
       },
