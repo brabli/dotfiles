@@ -197,5 +197,67 @@ vim.api.nvim_create_autocmd("BufEnter", {
    group = vim.api.nvim_create_augroup("php_eol", { clear = true }),
 })
 
+require("lspconfig").tailwindcss.setup({
+   classAttributes = {
+      "class",
+      "class: ",
+      "className",
+      "class:list",
+      "classList",
+      "ngClass",
+   },
+   -- There add every filetype you want tailwind to work on
+   filetypes = {
+      "css",
+      "scss",
+      "sass",
+      "postcss",
+      "html",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "svelte",
+      "vue",
+      "rust",
+   },
+   init_options = {
+      -- There you can set languages to be considered as different ones by tailwind lsp I guess same as includeLanguages in VSCod
+      userLanguages = {
+         rust = "html",
+      },
+   },
+   tailwindCSS = {
+      experimental = {
+         class_regex = {
+            'class: "(.*)"',
+            'class:%s*".*"',
+         },
+      },
+   },
+   settings = {
+      tailwindCSS = {
+         experimental = {
+            classRegex = {
+               'class: "(.*)"',
+               'class:%s*".*"',
+               [[class= "([^"]*)]],
+               [[class: "([^"]*)]],
+               '~H""".*class="([^"]*)".*"""',
+               '~F""".*class="([^"]*)".*"""',
+            },
+         },
+      },
+   },
+   -- Here If any of files from list will exist tailwind lsp will activate.
+   root_dir = require("lspconfig").util.root_pattern(
+      "tailwind.config.js",
+      "tailwind.config.ts",
+      "postcss.config.js",
+      "postcss.config.ts",
+      "windi.config.ts"
+   ),
+})
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
