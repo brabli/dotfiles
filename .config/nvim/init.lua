@@ -198,14 +198,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 require("lspconfig").tailwindcss.setup({
-   classAttributes = {
-      "class",
-      "class: ",
-      "className",
-      "class:list",
-      "classList",
-      "ngClass",
-   },
    -- There add every filetype you want tailwind to work on
    filetypes = {
       "css",
