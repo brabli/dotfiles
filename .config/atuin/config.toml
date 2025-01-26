@@ -46,18 +46,22 @@ ctrl_n_shortcuts = false
 ## amount of commands in your history.
 show_help = false
 
+selection_mode = "none" 
+
 ## Defaults to "emacs".  This specifies the keymap on the startup of `atuin
 ## search`.  If this is set to "auto", the startup keymap mode in the Atuin
 ## search is automatically selected based on the shell's keymap where the
 ## keybinding is defined.  If this is set to "emacs", "vim-insert", or
 ## "vim-normal", the startup keymap mode in the Atuin search is forced to be
 ## the specified one.
-# keymap_mode = "auto"
+keymap_mode = "vim-normal"
 
 ## Cursor style in each keymap mode.  If specified, the cursor style is changed
 ## in entering the cursor shape.  Available values are "default" and
 ## "{blink,steady}-{block,underline,bar}".
-# keymap_cursor = { emacs = "blink-block", vim_insert = "blink-block", vim_normal = "steady-block" }
+keymap_cursor = { emacs = "blink-block", vim_insert = "steady-bar", vim_normal = "steady-block" }
+
+enter_accept = true
 
 [search]
 filters = ["global", "session"]
