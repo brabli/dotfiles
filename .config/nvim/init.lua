@@ -201,10 +201,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
 require("lspconfig").tailwindcss.setup({
    filetypes = {
       "rust",
+      "twig",
    },
    init_options = {
       userLanguages = {
          rust = "html",
+         twig = "html",
       },
    },
    settings = {
