@@ -11,3 +11,4 @@
 	b = branch
 	p = pull --rebase
 	c = checkout
+	s = stash
