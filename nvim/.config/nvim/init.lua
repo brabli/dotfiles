@@ -226,5 +226,16 @@ require("lspconfig").tailwindcss.setup({
    },
 })
 
+-- LuaSnip stuff
+local ls = require("luasnip")
+local s = ls.snippet
+local t = ls.text_node
+
+ls.add_snippets("php", {
+   s("test", {
+      t({ "public function testSomething(): void", "{", "", "}" }),
+   }),
+})
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
