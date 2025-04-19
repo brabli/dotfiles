@@ -246,5 +246,9 @@ return {
             end,
          },
       })
+
+      -- Manually installed `just-lsp` on Arch as it wasn't installing via Mason for some reason
+      local lsp = require("lspconfig")
+      lsp.just.setup({})
    end,
 }
