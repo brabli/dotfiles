@@ -1,23 +1,14 @@
-# brabli's Dotfiles
+# brabli's dotfiles
 
 All the cool kids have a dotfiles repository, so as a cool kid myself I found it fitting to create my own.
 
-These files contain my config for the following programs:
+# Usage
 
-- Neovim
-- Vim
-- Tmux
-- Lazygit
-- Git
+> Make sure `$XDG_CONFIG_HOME` is set to `$HOME/.config`.
 
-# Installation
+I'm using [stow](https://www.gnu.org/software/stow/) to manage my dotfiles and [just](https://github.com/casey/just?tab=readme-ov-file#private-recipes) to run the necessary commands.
 
-First, make sure `$XDG_CONFIG_HOME` is set to `$HOME/.config`.
-
-I'm using [gnu stow](https://www.gnu.org/software/stow/) as a mechanism for installing my dotfiles. Install `stow` and clone this repository into your home directory.
-
-From inside this directory run `stow .` to create symlinks in your home directory to the files in this dotfiles repo.
-
+After installing both `just` and `stow` you can run `just` by itself inside this directory to get an overview of the available commands.
 
 # Additional Tools
 
