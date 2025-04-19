@@ -1,12 +1,16 @@
--- LSP Configuration & Plugins
 local get_intelephense_license = function()
-   local f = assert(io.open(os.getenv("HOME") .. "/.intelephense/license.txt", "rb"))
+   local home = os.getenv("HOME")
+   local path = home .. "/.intelephense/license.txt"
+   local file = assert(io.open(path, "rb")) -- [r]ead in [b]inary mode
+   local license_key = file:read("*a") -- Read entire file
 
-   local content = f:read("*a")
+   file:close()
 
-   f:close()
+   local trim = function(text)
+      string.gsub(text, "%s+", "")
+   end
 
-   return string.gsub(content, "%s+", "")
+   return trim(license_key)
 end
 
 return {
