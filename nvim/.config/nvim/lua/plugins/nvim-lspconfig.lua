@@ -235,6 +235,13 @@ return {
          "php-cs-fixer",
          "tailwindcss",
          "rust-analyzer",
+         "bashls",
+         "eslint",
+         "mdx_analyzer",
+         "shellharden",
+         "twiggy_language_server",
+         "ts_ls",
+         "docker_compose_language_service",
       })
 
       require("mason-tool-installer").setup({
