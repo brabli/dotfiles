@@ -21,7 +21,7 @@ list:
 [doc("Stow all directories as listed by `list`")]
 stow-all:
     @{{ call_recipe }} list | xargs stow --adopt
-    git reset --hard
+    @git reset --hard
     @echo All config files have been stowed.
 
 [doc("Unstow all directories as listed by `list`")]
