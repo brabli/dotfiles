@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# ReMove Broken Links
+LOCAL_BIN=/usr/local/bin
+
+find $LOCAL_BIN -type l ! -exec test -e {} \; -exec rm -fv {} \;
+
+# Here's what the command does:
+
+# find: This command is used to search for files and directories within a specified path.
+# /path/to/directory: Replace this part with the actual path of the directory where you want to remove broken symlinks.
+# -type l: This tells find to look for symbolic links.
+# ! -exec test -e {} \;: This part checks if the symlink points to an existing file or directory. The test -e command checks if the file exists, and the ! before it negates the result, so it matches broken symlinks.
+# -exec rm -fv {} \;: This part executes the rm command to remove the broken symlink found. The {} \; is a placeholder for the file name found by find, and -fv options for rm mean "force" (to avoid confirmation prompts) and "verbose" (to show which files are being deleted).

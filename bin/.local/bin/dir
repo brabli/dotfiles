@@ -1,0 +1,15 @@
+#!/bin/bash
+
+print_help() {
+    local MSG="$1"
+    printf "\n$0\n"
+    printf "$MSG\n\n";
+    exit 0;
+}
+
+if [ "$1" == "-h" ]; then
+    print_help "List all the directories in the current directory."
+fi;
+
+
+ls -d */

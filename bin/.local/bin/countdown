@@ -1,0 +1,19 @@
+#!/bin/bash
+
+count=$1
+
+if [ -z "$1" ]; then
+    count=10000
+fi
+
+if ! [[ "$count" =~ ^[0-9]+$ ]]; then
+  echo "Error: Starting number must be a positive integer."
+  exit 1
+fi
+
+while [ $count -gt 0 ]
+do
+    echo $count
+    count=$((count - 1))
+    sleep 1
+done

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# $2 is flags, I think
+
+if [ -z "$1" ]; then
+  echo "Error: No project name provided!"
+  exit 1
+fi
+
+# On my mac I use the latter directory, but I should really clean that up and use generic directories
+DIR="${PROJECTS:-$HOME/personal_projects/rust_lang}"
+
+cd $DIR
+
+if ! cargo new $1 $2; then
+  echo "Cargo failed to create a new Rust project, aborting."
+  exit 1;
+fi
+
+cd ./$1
+cargo run
+git add .
+git commit -m 'First commit'
+nvim ./
+

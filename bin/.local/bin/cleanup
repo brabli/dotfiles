@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# $1 = string|empty, cleanup directory
+function get_cleanup_dir() {
+    if [[ $1 == "" ]]
+    then
+        if [[ -d /Users/bradley/Desktop ]]
+        then
+            echo "/Users/bradley/Desktop"
+        else
+            echo "/desktop"
+        fi
+    else
+        echo "$1"
+    fi
+}
+
+# $1 = string, cleanup directory
+function create_directories() {
+    cleanup_dir=$1
+    [ -d $cleanup_dir/Images ] || mkdir $cleanup_dir/Images
+    [ -d $cleanup_dir/Images/unnamed_screenshots ] || mkdir $cleanup_dir/Images/unnamed_screenshots
+    [ -d $cleanup_dir/PDF ] || mkdir $cleanup_dir/PDF
+    [ -d $cleanup_dir/unsorted_files ] || mkdir $cleanup_dir/unsorted_files
+    [ -d $cleanup_dir/Audio ] || mkdir $cleanup_dir/Audio
+    [ -d $cleanup_dir/Text ] || mkdir $cleanup_dir/Text
+}
+
+# $1 = string, cleanup directory
+function sort_files() {
+    files_to_sort=$1/*
+    for filename in $files_to_sort
+    do
+        if [ -f "$filename" ] && mime_type=$(file --mime-type -b "$filename")
+        then
+            case "$mime_type" in
+
+                *image*)
+                    if [[ "$filename" == *Screenshot* ]]
+                    then
+                        mv "$filename" $unnamed_screenshots
+
+                    elif [[ "$filename" == *.webp* ]]
+                    then
+                        mv "$filename" $unsorted_files
+
+                    else
+                        mv "$filename" $images
+                    fi
+                    ;;
+                
+                *text*)
+                    if [[ "$filename" == *.svg* ]]
+                    then
+                        mv "$filename" $images
+                    else
+                        mv "$filename" $text
+                    fi
+                    ;;
+
+                *pdf*)
+                    mv "$filename" $pdfs
+                    ;;
+
+                *audio*)
+                    mv "$filename" $audio
+                    ;;
+
+                *)
+                    mv "$filename" $unsorted_files
+                    ;;
+
+            esac
+        fi
+    done
+}
+
+# $1 = string, cleanup directory
+function move_named_screenshots() {
+    cleanup_dir=$1
+    screenshots=$cleanup_dir/Images/unnamed_screenshots/*
+    for screenshot in $screenshots
+    do
+        if [[ "$screenshot" != *Screenshot* ]]
+        then
+            mv "$screenshot" "$cleanup_dir/Images"
+        fi
+    done
+}
+
+function remove_empty_directories() {
+    for DIRECTORY in "$unnamed_screenshots" "$pdfs" "$unsorted_files" "$audio" "$text"
+    do
+        FILES_IN_DIRECTORY=$(ls "$DIRECTORY")
+        if [ "$FILES_IN_DIRECTORY" == "" ]
+        then
+            rm -r "$DIRECTORY"
+        fi
+    done
+}
+
+# THIS ORDER IS IMPORTANT!
+cleanup_dir=$(get_cleanup_dir $1)
+# BUG Remove final char from cleanup_dir if it's a /. Bug when setting a custom directory in mac!
+create_directories "$cleanup_dir"
+
+# Global vars, I'd love to remove these.
+images=$cleanup_dir/Images
+unnamed_screenshots=$cleanup_dir/Images/unnamed_screenshots
+pdfs=$cleanup_dir/PDF
+unsorted_files=$cleanup_dir/unsorted_files
+audio=$cleanup_dir/Audio
+text=$cleanup_dir/Text
+
+sort_files "$cleanup_dir"
+move_named_screenshots "$cleanup_dir"
+remove_empty_directories

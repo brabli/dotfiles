@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Removes Node if it was manually installed.
+# Simplified version of https://gist.github.com/brock/5b1b70590e1171c4ab54
+# Stack Overflow issue https://stackoverflow.com/questions/11177954
+
+PREFIX="${PREFIX:-/usr/local}" # This ends up as /usr/local for me, I just wondered how it worked
+
+sudo rm -rf $HOME/{local,lib,include,node*,.node*,npm,.npm*}
+sudo rm -rf $PREFIX/lib/node*
+sudo rm -rf $PREFIX/include/node*
+sudo rm -rf $PREFIX/bin/{node,npm}
+sudo rm -rf $PREFIX/share/man/man1/node.1
+sudo rm -rf $PREFIX/share/doc/node*
+sudo rm -rf $PREFIX/lib/dtrace/node.d

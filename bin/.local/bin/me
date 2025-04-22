@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    set DESC="Show the user's SSH prompt"
+    echo
+    echo "Usage: $(basename $0) [OPTIONS]"
+    echo "Description: $(DESC)"
+    echo "Options:"
+    echo "  -h, --help    Show this help message"
+    exit 0
+fi
+
+echo "$(whoami)@$(cat /etc/hostname)"
+

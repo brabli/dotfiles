@@ -1,0 +1,33 @@
+#!/bin/bash
+
+SANDBOX_DIR="${TMPDIR:-/tmp}/rust_sandbox"
+
+# -f 'force' flag
+# Removes any existing sandbox before running the command.
+if [[ $1 -eq "-f" ]]; then
+    echo 'Forcing rust sandbox rebuild...'
+    rm -rf $SANDBOX_DIR
+fi
+
+if [ -d "$SANDBOX_DIR/sandbox" ]; then
+    echo 'Rust sandbox directory already exists, opening in VS Code...'
+
+    cd $SANDBOX_DIR/sandbox
+    code .
+    code ./src/main.rs
+
+    exit 0
+fi
+
+mkdir $SANDBOX_DIR
+cd $SANDBOX_DIR
+cargo new "sandbox" &> /dev/null
+
+cd $SANDBOX_DIR/sandbox
+code .
+cargo run &> /dev/null
+code ./src/main.rs
+
+# This is a temporary playground, I don't care about VCS.
+rm -rf .git
+rm .gitignore

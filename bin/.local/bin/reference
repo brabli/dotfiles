@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Mic permission issue? Allow terminal to access mic? Might just be a VSCode terminal thing.
+pidof Reference\ System | xargs kill && /Applications/Reference\ 4\ Systemwide.app/Contents/MacOS/Reference\ Systemwide & disown

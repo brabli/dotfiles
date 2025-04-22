@@ -1,0 +1,23 @@
+#!/bin/bash
+
+USAGE="Usage: $(basename "$0") [OPTIONS]
+
+Prune some docker resources without removing things you actually need.
+
+Options:
+  -h, --help     Show this help message and exit
+
+Examples:
+  $(basename "$0")
+"
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+  echo "$USAGE"
+  exit 0
+fi
+
+docker image prune -f
+docker image prune -a -f
+docker volume prune -f
+
+echo "Done."

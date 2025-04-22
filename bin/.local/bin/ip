@@ -1,0 +1,54 @@
+#!/bin/bash
+
+show_help_if_requested() {
+    if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+        echo "Usage: ${0##*/} [options]"
+        echo ""
+        echo "Retrieve your current IP address and copy it to the clipboard."
+        echo ""
+        echo "Options:"
+        echo "    -h, --help       Display this help message."
+        echo "    -t [number]      Set timeout in seconds."
+        echo "    -s               Silence output showing ip address."
+        exit 0
+    fi
+}
+
+show_help_if_requested $1;
+
+TIMEOUT="1";
+SILENCE="false"
+
+while getopts ":st:" opt; do
+    case $opt in
+        t)
+            TIMEOUT=$OPTARG ;;
+
+        s)
+            SILENCE="true" ;;
+
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1 ;;
+
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1 ;;
+    esac
+done
+
+echo "Timeout is set to $TIMEOUT";
+
+IP=$(curl --connect-timeout $TIMEOUT -s ifconfig.me/ip)
+
+if [ ! $IP ]; then
+    echo 'Failed to fetch IP address.' >&2
+    exit 1
+fi
+
+if [ $SILENCE != "true" ]; then
+    echo "Current IP address: $IP"
+fi
+
+echo -n $IP | pbcopy;
+echo "IP address copied to clipboard!" >&2

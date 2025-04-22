@@ -1,0 +1,18 @@
+#!/bin/bash
+OBSIDIAN_DIR="/Users/bradley/obsidian/bradley/*"
+OBSIDIAN_BIN_DIR="/Users/bradley/obsidian/bradley/Bin"
+BYTES="33"
+
+echo "Looking for files that are $BYTES bytes large...";
+
+FILECOUNT=0
+for FILE in $OBSIDIAN_DIR; do
+    FILESIZE=$(stat -f "%z" "$FILE")
+
+    if [ $BYTES -eq $FILESIZE ]; then
+        mv $FILE $OBSIDIAN_BIN_DIR
+        FILECOUNT=$(( FILECOUNT + 1))
+    fi
+done
+
+echo "Moved $FILECOUNT files to \"$OBSIDIAN_BIN_DIR\"."

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+##################################################
+# This script stops all running docker containers.
+##################################################
+
+function trim() {
+    local args="$*"
+    # Remove leading whitespace characters
+    args="${args#"${args%%[![:space:]]*}"}"
+    # Remove trailing whitespace characters
+    args="${args%"${args##*[![:space:]]}"}"
+    printf '%s' "$args"
+}
+
+# 1 red
+# 2 green
+# 3 sand
+# 4 blue
+# 5 purple
+# 6 Cyan
+# 7 White
+# 8 Grey
+
+function echo_green() {
+    local TEXT="$1"
+    local GREEN=$(tput setaf 2)
+    local RESET=$(tput sgr0)
+
+    local OUTPUT=$(printf "%s%s%s\n" "$GREEN" "$(trim $TEXT)" "$RESET");
+    echo $OUTPUT
+}
+
+NUM_RUNNING_CONTAINERS=$(docker ps -q | wc -l);
+
+if [ "$NUM_RUNNING_CONTAINERS" -gt "0" ]; then
+    echo_green "$NUM_RUNNING_CONTAINERS running containers found.";
+else
+    echo_green "No running containers found, nothing to do!";
+    exit 0;
+fi
+
+for CONTAINER in $(docker ps --format '{{.Names}}')
+do
+    echo "Stopping $CONTAINER...";
+    docker stop $CONTAINER >> /dev/null;
+done
+
+echo_green "Done!";

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Start a simple countdown in the background
+for i in {10000..1}; do
+  echo "$i"
+  sleep 1
+done &
+
+# Detach the countdown from the terminal
+disown
+
+echo "Countdown started. You can close the terminal now."

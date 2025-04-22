@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    set DESC="Test the internet and VPN connection"
+    echo
+    echo "Usage: $(basename $0) [OPTIONS]"
+    echo "Description: $(DESC)"
+    echo "Options:"
+    echo "  -h, --help    Show this help message"
+    exit 0
+fi
+
+ping_status=$(ping -c 1 -q 1.1.1.1 | awk 'FNR == 4')
+vpn_location=$(mullvad status | awk 'FNR == 4 { print $3 " " $4 }')
+echo "Connected to: ${vpn_location:-Nowhere}"
+echo "$ping_status"
+

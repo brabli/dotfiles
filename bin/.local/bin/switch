@@ -1,0 +1,41 @@
+#!/bin/bash
+# To add more PHP versions install via Homebrew and create appropriate case. Also run unlink command.
+
+function unlink_php_versions() {
+    echo "Unlinking PHP versions!"
+    # TODO see if there is a shorter way to do this
+    brew unlink php@7.4
+    brew unlink php@8.0
+}
+
+function switch_php_version() {
+    # Default vars for quick changing
+    settings_json="/Users/bradley/Library/Application Support/Code/User/settings.json"
+    php_version="7.1"
+
+    case "$1" in
+        php7.4)
+            echo "Switching to PHP 7.4!"
+            php_version="7.4"
+            brew link php@7.4
+            ;;
+        
+        php8.0)
+            echo "Switching to PHP 8.0!"
+            php_version="8.0"
+            brew link php@8.0
+            ;;
+
+        *)
+            echo "Switching to system default PHP!"
+            ;;
+    esac
+    echo "PHP VERSION: $php_version"
+    # Changes VS Code's settings.json "intelephense.environment.phpVersion" key to appropriate value.
+    tmp=$(mktemp)
+    jq --arg php_version "$php_version" '."intelephense.environment.phpVersion" = $php_version' "$settings_json" > "$tmp" && mv "$tmp" "$settings_json"
+}
+
+# PROGRAM
+unlink_php_versions
+switch_php_version $1
