@@ -186,6 +186,14 @@ return {
             init_options = {
                licenceKey = get_intelephense_license(),
             },
+
+            settings = {
+               intelephense = {
+                  files = {
+                     maxSize = 5000000
+                  },
+               },
+            }
          },
 
          emmet_language_server = {
