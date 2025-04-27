@@ -5,11 +5,11 @@ _default:
 
 [doc("Stow a specific program's config files")]
 stow dir:
-    @stow . {{ dir }}
+    @stow {{ dir }}
 
 [doc("Unstow a specific program's config files")]
 unstow dir:
-    @stow -D . {{ dir }}
+    @stow -D {{ dir }}
 
 [doc("List all directories available for stowing")]
 list:
