@@ -7,10 +7,12 @@ local get_intelephense_license = function()
    file:close()
 
    local trim = function(text)
-      string.gsub(text, "%s+", "")
+      return string.gsub(text, "%s+", "")
    end
 
-   return trim(license_key)
+   local key = trim(license_key)
+
+   return key
 end
 
 return {
@@ -190,10 +192,10 @@ return {
             settings = {
                intelephense = {
                   files = {
-                     maxSize = 5000000
+                     maxSize = 5000000,
                   },
                },
-            }
+            },
          },
 
          emmet_language_server = {
