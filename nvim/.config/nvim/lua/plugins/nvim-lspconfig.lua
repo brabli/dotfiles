@@ -252,6 +252,7 @@ return {
          "twiggy_language_server",
          "ts_ls",
          "docker_compose_language_service",
+         "lemminx",
       })
 
       require("mason-tool-installer").setup({
