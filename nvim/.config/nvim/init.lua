@@ -1,6 +1,11 @@
 -- BG: Lua guide
 -- https://neovim.io/doc/user/lua-guide.html
 
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.tabstop = 4 -- A tab is 4 spaces
+vim.opt.softtabstop = 4 -- A tab key press inserts 4 spaces
+vim.opt.shiftwidth = 4 -- Indentation is 4 spaces
+
 vim.api.nvim_create_autocmd("FileType", {
    pattern = "lua",
    callback = function()
