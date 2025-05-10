@@ -56,17 +56,17 @@ return { -- Autoformat
          -- is found.
          javascript = { "prettierd", "prettier" },
       },
-      formatters = {
-         ["php-cs-fixer"] = {
-            command = "php-cs-fixer",
-            args = {
-               "fix",
-               "$FILENAME",
-               "--config=" .. getPhpCsConfigFile(),
-               "--allow-risky=yes", -- if you have risky stuff in config, if not you dont need it.
-            },
-            stdin = false,
-         },
-      },
+      -- formatters = {
+      --    ["php-cs-fixer"] = {
+      --       command = "php-cs-fixer",
+      --       args = {
+      --          "fix",
+      --          "$FILENAME",
+      --          "--config=" .. getPhpCsConfigFile(),
+      --          "--allow-risky=yes", -- if you have risky stuff in config, if not you dont need it.
+      --       },
+      --       stdin = false,
+      --    },
+      -- },
    },
 }
