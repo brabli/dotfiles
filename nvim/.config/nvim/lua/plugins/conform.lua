@@ -45,6 +45,10 @@ return { -- Autoformat
       formatters_by_ft = {
          lua = { "stylua" },
          php = { "php-cs-fixer" },
+         javascript = { "biome" },
+         typescript = { "biome" },
+         json = { "biome" },
+         jsonc = { "biome" },
          -- Conform can also run multiple formatters sequentially
          -- python = { "isort", "black" },
          --
