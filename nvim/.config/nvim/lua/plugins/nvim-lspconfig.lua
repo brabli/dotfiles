@@ -246,11 +246,9 @@ return {
          "tailwindcss",
          "rust-analyzer",
          "bashls",
-         "eslint",
          "mdx_analyzer",
          "shellharden",
          "twiggy_language_server",
-         "ts_ls",
          "docker_compose_language_service",
          "lemminx",
       })
