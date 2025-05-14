@@ -17,7 +17,7 @@ local function getPhpCsConfigFile()
    end
 end
 
-return { -- Autoformat
+return {
    "stevearc/conform.nvim",
    lazy = false,
    keys = {
@@ -45,27 +45,24 @@ return { -- Autoformat
       formatters_by_ft = {
          lua = { "stylua" },
          php = { "php-cs-fixer" },
-         javascript = { "biome" },
          typescript = { "biome" },
+         javascript = { "biome" },
          json = { "biome" },
          jsonc = { "biome" },
-         -- Conform can also run multiple formatters sequentially
-         -- python = { "isort", "black" },
-         --
-         -- You can use a sub-list to tell conform to run *until* a formatter
-         -- is found.
       },
-      -- formatters = {
-      --    ["php-cs-fixer"] = {
-      --       command = "php-cs-fixer",
-      --       args = {
-      --          "fix",
-      --          "$FILENAME",
-      --          "--config=" .. getPhpCsConfigFile(),
-      --          "--allow-risky=yes", -- if you have risky stuff in config, if not you dont need it.
-      --       },
-      --       stdin = false,
-      --    },
-      -- },
+      formatters = {
+         formatters = {
+            ["php-cs-fixer"] = {
+               command = "php-cs-fixer",
+               args = {
+                  "fix",
+                  "$FILENAME",
+                  "--config=" .. getPhpCsConfigFile(),
+                  "--allow-risky=yes",
+               },
+               stdin = false,
+            },
+         },
+      },
    },
 }
