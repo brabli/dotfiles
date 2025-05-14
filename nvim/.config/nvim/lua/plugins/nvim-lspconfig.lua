@@ -242,6 +242,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
          "stylua",
+         "biome",
          "php-cs-fixer",
          "tailwindcss",
          "rust-analyzer",
@@ -249,6 +250,7 @@ return {
          "mdx_analyzer",
          "shellharden",
          "twiggy_language_server",
+         "ts_ls",
          "docker_compose_language_service",
          "lemminx",
       })
