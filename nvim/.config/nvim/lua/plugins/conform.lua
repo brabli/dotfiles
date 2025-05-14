@@ -19,6 +19,7 @@ end
 
 return {
    "stevearc/conform.nvim",
+   log_level = vim.log.levels.TRACE,
    lazy = false,
    keys = {
       {
@@ -51,17 +52,15 @@ return {
          jsonc = { "biome" },
       },
       formatters = {
-         formatters = {
-            ["php-cs-fixer"] = {
-               command = "php-cs-fixer",
-               args = {
-                  "fix",
-                  "$FILENAME",
-                  "--config=" .. getPhpCsConfigFile(),
-                  "--allow-risky=yes",
-               },
-               stdin = false,
+         ["php-cs-fixer"] = {
+            command = "php-cs-fixer",
+            args = {
+               "--config=" .. getPhpCsConfigFile(),
+               "--allow-risky=yes",
+               "fix",
+               "$FILENAME",
             },
+            stdin = false,
          },
       },
    },
