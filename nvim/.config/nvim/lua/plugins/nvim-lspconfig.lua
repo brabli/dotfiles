@@ -1,20 +1,3 @@
-local get_intelephense_license = function()
-   local home = os.getenv("HOME")
-   local path = home .. "/.intelephense/license.txt"
-   local file = assert(io.open(path, "rb")) -- [r]ead in [b]inary mode
-   local license_key = file:read("*a") -- Read entire file
-
-   file:close()
-
-   local trim = function(text)
-      return string.gsub(text, "%s+", "")
-   end
-
-   local key = trim(license_key)
-
-   return key
-end
-
 return {
    "neovim/nvim-lspconfig",
    dependencies = {
@@ -185,9 +168,7 @@ return {
          -- tsserver = {},
          --
          intelephense = {
-            init_options = {
-               licenceKey = get_intelephense_license(),
-            },
+            -- To add license you need a file called `~/intelephense/licence.txt` which contains your license.
 
             settings = {
                intelephense = {
