@@ -7,6 +7,17 @@ vim.opt.softtabstop = 4 -- A tab key press inserts 4 spaces
 vim.opt.shiftwidth = 4 -- Indentation is 4 spaces
 
 vim.api.nvim_create_autocmd("FileType", {
+   pattern = "twig",
+   callback = function()
+      vim.lsp.start({
+         name = "emmet_language_server",
+         cmd = { "emmet-language-server", "--stdio" },
+         root_dir = vim.fn.getcwd(),
+      })
+   end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
    pattern = "lua",
    callback = function()
       vim.bo.expandtab = true -- Convert tabs to spaces
@@ -193,7 +204,6 @@ require("lazy").setup("plugins", {
 })
 
 -- require("leap").create_default_mappings()
--- require("luasnip").filetype_extend("twig", { "html" })
 
 require("lualine").setup({})
 
@@ -233,6 +243,8 @@ require("lspconfig").tailwindcss.setup({
 
 -- LuaSnip stuff
 local ls = require("luasnip")
+ls.filetype_extend("twig", { "html" })
+
 local s = ls.snippet
 local t = ls.text_node
 
