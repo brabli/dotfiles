@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Usage: ${0##*/} [options]"
+    echo ""
+    echo "Kill all running tmux sessions."
+    echo ""
+    echo "Options:"
+    echo "    -h, --help       Display this help message."
+    exit 0
+fi
+
+
+tmux ls -F '#{session_name}' | xargs -n 1 tmux kill-session -t
