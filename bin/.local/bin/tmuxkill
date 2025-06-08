@@ -10,5 +10,4 @@ if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     exit 0
 fi
 
-
 tmux ls -F '#{session_name}' | xargs -n 1 tmux kill-session -t
