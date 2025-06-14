@@ -254,5 +254,10 @@ ls.add_snippets("php", {
    }),
 })
 
+-- Add to your colorscheme or highlight configuration
+vim.api.nvim_set_hl(0, "@lsp.type.parameter.mutable.rust", { underline = true })
+vim.api.nvim_set_hl(0, "@lsp.type.variable.mutable.rust", { underline = true })
+vim.api.nvim_set_hl(0, "@lsp.mod.mutable.rust", { underline = true })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
