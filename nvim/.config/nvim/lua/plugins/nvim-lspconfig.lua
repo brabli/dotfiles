@@ -228,6 +228,13 @@ return {
                      enable = false,
                   },
                },
+               -- This might sort imports automatically if I'm lucky
+               imports = {
+                  granularity = {
+                     group = "module",
+                  },
+                  prefix = "self",
+               },
             },
          },
       })
