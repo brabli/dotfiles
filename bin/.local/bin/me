@@ -1,12 +1,10 @@
 #!/bin/bash
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    set DESC="Show the user's SSH prompt"
-    echo
-    echo "Usage: $(basename $0) [OPTIONS]"
-    echo "Description: $(DESC)"
+    echo "Usage: $(basename $0) [OPTION]"
+    echo "Show the user's SSH prompt"
     echo "Options:"
-    echo "  -h, --help    Show this help message"
+    echo "  -h, --help    Show this help message and exit"
     exit 0
 fi
 
