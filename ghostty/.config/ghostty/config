@@ -5,3 +5,6 @@ mouse-hide-while-typing = true
 #custom-shader = /Users/bradley/personal_projects/ghostty-shaders/retro-terminal.glsl
 font-size = 12
 macos-icon = holographic
+cursor-text = black
+cursor-color = white
+
