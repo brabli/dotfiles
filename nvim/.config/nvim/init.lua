@@ -259,5 +259,8 @@ vim.api.nvim_set_hl(0, "@lsp.type.parameter.mutable.rust", { underline = true })
 vim.api.nvim_set_hl(0, "@lsp.type.variable.mutable.rust", { underline = true })
 vim.api.nvim_set_hl(0, "@lsp.mod.mutable.rust", { underline = true })
 
+-- Make text visible under block cursor. Doesn't work in Ghostty yet, but does in Kitty.
+vim.api.nvim_set_hl(0, "Cursor", { fg = "#000000", bg = "#FFFFFF" })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
