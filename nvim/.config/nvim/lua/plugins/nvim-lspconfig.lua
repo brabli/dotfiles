@@ -138,49 +138,6 @@ return {
                },
             },
          },
-
-         emmet_language_server = {
-            filetypes = {
-               "html",
-               "twig",
-               "css",
-               "less",
-               "sass",
-               "scss",
-            },
-         },
-
-         lua_ls = {
-            settings = {
-               Lua = {
-                  completion = {
-                     callSnippet = "Replace",
-                  },
-                  -- runtime = {
-                  --    -- Tell the language server which version of Lua you're using
-                  --    -- (most likely LuaJIT in the case of Neovim)
-                  --    version = "LuaJIT",
-                  -- },
-                  -- diagnostics = {
-                  --    -- Get the language server to recognize the `vim` global
-                  --    globals = {
-                  --       "vim",
-                  --       "require",
-                  --    },
-                  -- },
-                  -- workspace = {
-                  --    -- Make the server aware of Neovim runtime files
-                  --    library = vim.api.nvim_get_runtime_file("", true),
-                  -- },
-                  -- -- Do not send telemetry data containing a randomized but unique identifier
-                  telemetry = {
-                     enable = false,
-                  },
-                  -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                  -- diagnostics = { disable = { 'missing-fields' } },
-               },
-            },
-         },
       }
 
       -- Ensure the servers and tools above are installed
@@ -234,6 +191,53 @@ return {
       -- Manually installed `just-lsp` on Arch as it wasn't installing via Mason for some reason
       local lsp = require("lspconfig")
       lsp.just.setup({})
+
+      vim.lsp.config("emmet_language_server", {
+         filetypes = {
+            "html",
+            "twig",
+            "css",
+            "less",
+            "sass",
+            "scss",
+         },
+      })
+
+      vim.lsp.config("lua_ls", {
+
+         settings = {
+            Lua = {
+               completion = {
+                  callSnippet = "Replace",
+               },
+               runtime = {
+                  -- Tell the language server which version of Lua you're using
+                  -- (most likely LuaJIT in the case of Neovim)
+                  version = "LuaJIT",
+               },
+               diagnostics = {
+                  -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                  -- disable = { 'missing-fields' },
+                  globals = {
+                     "vim",
+                  },
+               },
+               workspace = {
+                  checkThirdParty = false,
+                  library = {
+                     vim.env.VIMRUNTIME,
+                     -- Make the server aware of Neovim runtime files
+                     -- This slow as hell damn!!!!
+                     -- library = vim.api.nvim_get_runtime_file("", true),
+                  },
+               },
+               -- Do not send telemetry data containing a randomized but unique identifier
+               telemetry = {
+                  enable = false,
+               },
+            },
+         },
+      })
 
       -- Oh my God this took so fucking long to figure out how to do
       -- https://github.com/neovim/nvim-lspconfig?tab=readme-ov-file#configuration
