@@ -2,3 +2,5 @@
 set show-mode-in-prompt on
 set vi-cmd-mode-string "\1\033[2 q\2"
 set vi-ins-mode-string "\1\033[6 q\2"
+# Remove delay when switching between vim modes in bash
+set keyseq-timeout 30
