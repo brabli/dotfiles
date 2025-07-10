@@ -12,3 +12,5 @@
 	p = pull --rebase
 	c = checkout
 	s = stash
+	sp = stash pop
+	P = push
