@@ -239,6 +239,14 @@ return {
          },
       })
 
+      vim.lsp.config("twiggy_language_server", {
+         settings = {
+            twiggy = {
+               framwork = "symfony",
+            },
+         },
+      })
+
       -- Oh my God this took so fucking long to figure out how to do
       -- https://github.com/neovim/nvim-lspconfig?tab=readme-ov-file#configuration
       vim.lsp.config("rust_analyzer", {
