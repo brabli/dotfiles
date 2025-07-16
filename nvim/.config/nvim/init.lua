@@ -38,8 +38,8 @@ vim.filetype.add({
    },
 
    pattern = {
-      -- Match filenames like - ".env.example", ".env.local" and so on
-      [".+%.env%.[%w_.-]+"] = "sh",
+      [".+%.env%.[%w_.-]+"] = "sh", -- Match ".env.example", ".env.local" and so on
+      [".+%.dist.ya?ml"] = "yaml",
       [".+%.ya?ml%.[%w]+"] = "yaml",
       [".+%.neon"] = "yaml", -- Neon files are similar to yaml
    },
