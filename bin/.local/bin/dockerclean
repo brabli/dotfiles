@@ -20,4 +20,11 @@ docker image prune -f
 docker image prune -a -f
 docker volume prune -f
 
+NUM_ORPHANS=$(docker images -f dangling=true -q | wc -l)
+
+if [ "$NUM_ORPHANS" -gt 0 ]; then
+  echo "Removing $NUM_ORPHANS orphans."
+  docker rmi -f $(docker images -f dangling=true -q)
+fi
+
 echo "Done."
