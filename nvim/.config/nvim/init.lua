@@ -235,6 +235,7 @@ require("lspconfig").tailwindcss.setup({
          experimental = {
             classRegex = {
                'class:\\s*"(.*)"',
+               -- 'class="(.*)"',
             },
          },
       },
