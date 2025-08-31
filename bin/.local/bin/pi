@@ -2,11 +2,10 @@
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     set DESC="Test the internet and VPN connection"
-    echo
     echo "Usage: $(basename $0) [OPTIONS]"
-    echo "Description: $(DESC)"
+    echo "Quick internet and VPN healthcheck."
     echo "Options:"
-    echo "  -h, --help    Show this help message"
+    echo "  -h, --help    Show this help and exit"
     exit 0
 fi
 
