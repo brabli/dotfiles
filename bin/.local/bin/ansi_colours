@@ -7,7 +7,7 @@ for i in range(30, 37 + 1):
 
 # Odd spacing required to line text up on output
 print("\033[39m\\033[0m                          - Reset all styles\n")
-print("\\033[2K                          - Clear Line")
+print("\\033[2K                          - Clear line")
 print("\\033[<L>;<C>H or \\033[<L>;<C>f   - Put the cursor at line L and column C.")
 print("\\033[<N>A                        - Move the cursor up N lines")
 print("\\033[<N>B                        - Move the cursor down N lines")
