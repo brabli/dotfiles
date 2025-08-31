@@ -10,8 +10,17 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     exit 0
 fi
 
-ping_status=$(ping -c 1 -q 1.1.1.1 | awk 'FNR == 4')
+echo -e "\033[1mVPN\033[0m"
+
 vpn_location=$(mullvad status | awk 'FNR == 4 { print $3 " " $4 }')
-echo "Connected to: ${vpn_location:-Nowhere}"
+
+if [ -z "$vpn_location" ]; then
+    echo -e "\033[31mNot connected to a VPN.\033[0m"
+else
+    echo -e "Connected to: \033[32m$vpn_location\033[0m"
+fi
+
+ping_status=$(ping -c 1 -q 1.1.1.1 | awk 'FNR == 4')
+echo -e "\033[1mPing\033[0m"
 echo "$ping_status"
 
