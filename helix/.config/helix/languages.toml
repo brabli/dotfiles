@@ -1,0 +1,18 @@
+[[language]]
+name = "twig"
+language-servers = ["twiggy-language-server", "emmet-ls"]
+file-types = ["twig"]
+roots = ["templates"]
+
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "emmet-ls"]
+
+[language-server.twiggy-language-server]
+command = "twiggy-language-server"
+args = ["--stdio"]
+
+[language-server.emmet-ls]
+args = ["--stdio"]
+command="emmet-ls"
+
