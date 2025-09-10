@@ -10,3 +10,8 @@ select = "underline"
 
 [editor.soft-wrap]
 enable = true
+max-indent-retain = 999
+
+[editor.indent-guides]
+render = true
+character = "┊"
