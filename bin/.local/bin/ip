@@ -4,12 +4,13 @@ show_help_if_requested() {
     if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
         echo "Usage: ${0##*/} [options]"
         echo ""
-        echo "Retrieve your current IP address and copy it to the clipboard."
+        echo "My IP - Retrieve your current IP address and copy it to the clipboard."
         echo ""
         echo "Options:"
         echo "    -h, --help       Display this help message."
-        echo "    -t [number]      Set timeout in seconds."
+        echo "    -t [number]      Set timeout in seconds, default it 1."
         echo "    -s               Silence output showing ip address."
+        echo "    -l               (Loud!) Verbose output."
         exit 0
     fi
 }
@@ -18,14 +19,18 @@ show_help_if_requested $1;
 
 TIMEOUT="1";
 SILENCE="false"
+VERBOSE="false"
 
-while getopts ":st:" opt; do
+while getopts ":st:l" opt; do
     case $opt in
         t)
-            TIMEOUT=$OPTARG ;;
+            TIMEOUT="$OPTARG" ;;
 
         s)
             SILENCE="true" ;;
+
+        l)
+            VERBOSE="true" ;;
 
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -37,7 +42,9 @@ while getopts ":st:" opt; do
     esac
 done
 
-echo "Timeout is set to $TIMEOUT";
+if [ "true" == "$VERBOSE" ]; then
+    echo "Timeout is set to $TIMEOUT.";
+fi
 
 IP=$(curl --connect-timeout $TIMEOUT -s ifconfig.me/ip)
 
@@ -50,5 +57,10 @@ if [ $SILENCE != "true" ]; then
     echo "Current IP address: $IP"
 fi
 
-echo -n $IP | pbcopy;
-echo "IP address copied to clipboard!" >&2
+# if [ which pbcopy ]; then
+#     echo -n $IP | pbcopy;
+# elif [ which xclilp ]; then
+#     echo -n $IP | xclip -sel clip
+# fi
+
+# echo "IP address copied to clipboard!" >&2
