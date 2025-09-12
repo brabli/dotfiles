@@ -15,3 +15,7 @@ max-indent-retain = 999
 [editor.indent-guides]
 render = true
 character = "┊"
+
+[keys.normal.space]
+"." = "file_picker_in_current_buffer_directory"
+ 
