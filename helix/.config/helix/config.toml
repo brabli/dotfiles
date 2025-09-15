@@ -16,6 +16,13 @@ max-indent-retain = 999
 render = true
 character = "┊"
 
+[editor.smart-tab]
+"supersede-menu" = true
+
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
- 
+
+[keys.normal]
+"-" = "file_explorer_in_current_buffer_directory"
+"K" = "hover"
+"C-r" = "redo"
