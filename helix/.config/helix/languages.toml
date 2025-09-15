@@ -1,6 +1,6 @@
 [[language]]
 name = "twig"
-language-servers = ["twiggy-language-server", "emmet-ls"]
+language-servers = ["twiggy-language-server", "emmet-ls", "tailwindcss-language-server"]
 file-types = ["twig"]
 roots = ["templates"]
 
@@ -13,6 +13,9 @@ command = "twiggy-language-server"
 args = ["--stdio"]
 
 [language-server.emmet-ls]
+command = "emmet-ls"
 args = ["--stdio"]
-command="emmet-ls"
 
+[language-server.tailwindcss-language-server]
+command = "tailwind-language-server"
+args = ["--stdio"]
