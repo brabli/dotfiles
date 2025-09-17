@@ -1,17 +1,24 @@
 #!/bin/bash
 
 tmp=$(mktemp)
-cat > "$tmp"
+cat >"$tmp"
 
 "$1/app/vendor/bin/php-cs-fixer" --config="$1/app/.php-cs-fixer.dist.php" fix "$tmp" --quiet --allow-risky=yes
 
-content=$(cat $tmp)
+content=$(cat "$tmp")
 
 last_letter="${content: -1}"
 
 if [[ "$last_letter" != $'\n' ]]; then
-  # Add newline if php-cs-fixer doesn't add one, which for some reason it's not!!!
-  sed -i -e '$a\\' "$tmp"
+
+    if [ "$OSTYPE" = "linux-gnu" ]; then
+        sed -i -e '$a\\' "$tmp"
+    fi
+
+    if [ "$OSTYPE" = "darwin24" ]; then
+        sed -i '' -e '$a\
+' "$tmp" # Intentional formatting
+    fi
 fi
 
 cat "$tmp"
