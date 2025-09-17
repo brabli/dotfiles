@@ -23,6 +23,12 @@ character = "┊"
 "." = "file_picker_in_current_buffer_directory"
 
 [keys.normal]
-"-" = "file_explorer_in_current_buffer_directory"
 "K" = "hover"
 "C-r" = "redo"
+"-" = [
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/unique-file}',
+  ':redraw',
+]
