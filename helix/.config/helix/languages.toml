@@ -10,7 +10,12 @@ language-servers = ["vscode-html-language-server", "emmet-ls"]
 
 [[language]]
 name = "php"
-formatter = { command = "php-cs-fixer-wrapper", args = ["%{working_directory}"] }
+formatter = { command = "php-cs-fixer-wrapper", args = ["/Users/bradley/work_projects/inscyte-crm"] }
+auto-format = true
+
+[[language]]
+name = "bash"
+formatter = { command = "shfmt", args = ["--indent", "4"] }
 auto-format = true
 
 [language-server.twiggy-language-server]
