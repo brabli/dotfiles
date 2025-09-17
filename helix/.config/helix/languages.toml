@@ -8,6 +8,11 @@ roots = ["templates"]
 name = "html"
 language-servers = ["vscode-html-language-server", "emmet-ls"]
 
+[[language]]
+name = "php"
+formatter = { command = "php-cs-fixer-wrapper", args = ["%{working_directory}"] }
+auto-format = true
+
 [language-server.twiggy-language-server]
 command = "twiggy-language-server"
 args = ["--stdio"]
