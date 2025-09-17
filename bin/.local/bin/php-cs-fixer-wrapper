@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tmp=$(mktemp --suffix=.php)
+tmp=$(mktemp)
 cat > "$tmp"
 
 "$1/app/vendor/bin/php-cs-fixer" --config="$1/app/.php-cs-fixer.dist.php" fix "$tmp" --quiet --allow-risky=yes
