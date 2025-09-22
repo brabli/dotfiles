@@ -18,6 +18,32 @@ name = "bash"
 formatter = { command = "shfmt", args = ["--indent", "4"] }
 auto-format = true
 
+[[language]]
+name = "javascript"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+auto-format = true
+
+[[language]]
+name = "tsx"
+auto-format = true
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+
+[[language]]
+name = "jsx"
+auto-format = true
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+
+[[language]]
+name = "json"
+language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
+
+# LSPs
+
 [language-server.twiggy-language-server]
 command = "twiggy-language-server"
 args = ["--stdio"]
@@ -29,3 +55,7 @@ args = ["--stdio"]
 [language-server.tailwindcss-language-server]
 command = "tailwind-language-server"
 args = ["--stdio"]
+
+[language-server.biome]
+command =  "biome" 
+args = ["lsp-proxy"]
