@@ -7,4 +7,4 @@ font-size = 12
 macos-icon = holographic
 cursor-text = black
 cursor-color = white
-macos-option-as-alt = true
+macos-option-as-alt = left
