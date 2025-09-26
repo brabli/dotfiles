@@ -53,7 +53,7 @@ command = "emmet-ls"
 args = ["--stdio"]
 
 [language-server.tailwindcss-language-server]
-command = "tailwind-language-server"
+command = "tailwindcss-language-server"
 args = ["--stdio"]
 
 [language-server.biome]
