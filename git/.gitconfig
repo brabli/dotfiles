@@ -3,8 +3,6 @@
 [user]
 	name = brabli
 	email = 67018167+brabli@users.noreply.github.com
-[core]
-	editor = nvim
 [init]
 	defaultBranch = main
 [alias]
