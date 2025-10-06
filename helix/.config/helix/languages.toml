@@ -59,3 +59,8 @@ args = ["--stdio"]
 [language-server.biome]
 command =  "biome" 
 args = ["lsp-proxy"]
+
+# Allow `!php/const` in yaml files without the LSP crying
+[language-server.yaml-language-server.config]
+yaml.customTags = ["!php/const scalar"]
+
