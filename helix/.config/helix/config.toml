@@ -3,6 +3,8 @@ theme = "catppuccin_mocha"
 [editor]
 line-number = "relative"
 color-modes = true
+middle-click-paste = false
+cursorline = true
 
 [editor.lsp]
 display-inlay-hints = true
@@ -28,6 +30,8 @@ character = "┊"
 
 [keys.normal]
 esc = "collapse_selection"
+D = "kill_to_line_end"
+C = ["extend_to_line_end", "change_selection"] 
 "K" = "hover"
 "C-r" = "redo"
 "-" = [
