@@ -1,5 +1,5 @@
 [[mgr.prepend_keymap]]
 on = "-"
-run = "back"
+run = "leave"
 desc = "Navigate back"
 
