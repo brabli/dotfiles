@@ -1,5 +1,10 @@
 [[mgr.prepend_keymap]]
 on = "-"
 run = "leave"
-desc = "Navigate back"
+desc = "Navigate up a directory"
+
+[[mgr.prepend_keymap]]
+on = "<esc>"
+run = "quit"
+desc = "Quit Yazi"
 
