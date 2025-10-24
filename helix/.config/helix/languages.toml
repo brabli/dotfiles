@@ -18,6 +18,11 @@ name = "bash"
 formatter = { command = "shfmt", args = ["--indent", "4"] }
 auto-format = true
 
+# Add yaml aliases
+[[language]]
+name = "yaml"
+file-types = ["yaml", "yml", "dist.yml", "dist.yaml"]
+
 [[language]]
 name = "javascript"
 language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
