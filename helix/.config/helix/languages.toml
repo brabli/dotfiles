@@ -25,7 +25,7 @@ auto-format = true
 # Add yaml aliases
 [[language]]
 name = "yaml"
-file-types = ["yaml", "yml", "dist.yml", "dist.yaml"]
+file-types = ["yaml", "yml", "yml.dist", "yaml.dist", "neon", "neon.dist"]
 
 [[language]]
 name = "javascript"
