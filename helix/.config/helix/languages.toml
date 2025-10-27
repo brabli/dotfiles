@@ -14,6 +14,10 @@ formatter = { command = "php-cs-fixer-wrapper", args = ["/Users/bradley/work_pro
 auto-format = true
 
 [[language]]
+name = "xml"
+file-types = ["xml", "xml.dist"]
+
+[[language]]
 name = "bash"
 formatter = { command = "shfmt", args = ["--indent", "4"] }
 auto-format = true
