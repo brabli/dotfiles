@@ -15,6 +15,7 @@ auto-format = true
 
 [[language]]
 name = "xml"
+language-servers = ['vscode-html-language-server']
 file-types = ["xml", "xml.dist"]
 
 [[language]]
