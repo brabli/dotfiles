@@ -32,6 +32,7 @@ character = "┊"
 esc = "collapse_selection"
 D = "kill_to_line_end"
 C = ["extend_to_line_end", "change_selection"] 
+C-c = "copy_selection_on_next_line"
 "K" = "hover"
 "C-r" = "redo"
 "-" = [
