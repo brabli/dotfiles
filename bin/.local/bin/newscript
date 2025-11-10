@@ -1,50 +1,45 @@
 #!/bin/bash
 
-echo "Closed for lunch."
-echo "Actually, I just need to update this script as it's quite old."
-exit 0
-
 SCRIPT_NAME=$1
 
-while [ -z $SCRIPT_NAME ]; do
-  echo "What should the script be called?" >&2
-  read SCRIPT_NAME
-  if [ -z $SCRIPT_NAME ]; then
-    echo "You need a name for the new script!" >&2
-  fi
+while [ -z "$SCRIPT_NAME" ]; do
+    echo "What should the script be called?" >&2
+    read -r SCRIPT_NAME
+    if [ -z "$SCRIPT_NAME" ]; then
+        echo "You need a name for the new script!" >&2
+    fi
 done
 
 FALLBACK_PATH="$HOME/scripts/"
 
 SCRIPT_PATH="${SCRIPT_PATH:-$FALLBACK_PATH}/$SCRIPT_NAME"
 
-if [ -s $SCRIPT_NAME ]; then
-  echo "A script or executable with the name '$SCRIPT_NAME' already exists!" >&2
-  exit 1
+if [ -s "$SCRIPT_NAME" ]; then
+    echo "A script or executable with the name '$SCRIPT_NAME' already exists!" >&2
+    exit 1
 fi
 
-sudo touch $SCRIPT_PATH &> /dev/null
+sudo touch "$SCRIPT_PATH" &>/dev/null
 
-if ! [ -f $SCRIPT_PATH ]; then
-  echo "Failed to create a script at $SCRIPT_PATH" >&2
-  exit 1
+if ! [ -f "$SCRIPT_PATH" ]; then
+    echo "Failed to create a script at $SCRIPT_PATH" >&2
+    exit 1
 fi
 
-sudo chmod 777 $SCRIPT_PATH
-echo "#!/bin/bash" >> $SCRIPT_PATH
-echo "echo \"$SCRIPT_PATH is running!\"" >> $SCRIPT_PATH
+sudo chmod 777 "$SCRIPT_PATH"
+echo "#!/bin/bash" >>"$SCRIPT_PATH"
+echo "echo \"$SCRIPT_PATH is running!\"" >>"$SCRIPT_PATH"
 
 echo "Successfully created a new script at $SCRIPT_PATH" >&2
 echo "Linking to /usr/local/bin..." >&2
 
-if ! sudo ln -s $SCRIPT_PATH "/usr/local/bin/$SCRIPT_NAME" >&2; then
-  echo "Failed to link. Removing any created files..." >&2
-  rm $SCRIPT_PATH &> "/dev/null"
-  rm "/usr/local/bin/$SCRIPT_NAME" &> /dev/null
-  echo "Done." >&2
-  exit 1
+if ! sudo ln -s "$SCRIPT_PATH" "/usr/local/bin/$SCRIPT_NAME" >&2; then
+    echo "Failed to link. Removing any created files..." >&2
+    rm "$SCRIPT_PATH" &>"/dev/null"
+    rm "/usr/local/bin/$SCRIPT_NAME" &>/dev/null
+    echo "Done." >&2
+    exit 1
 fi
 
 echo "Successfully created and linked script!"
-nvim $SCRIPT_PATH;
-
+nvim "$SCRIPT_PATH"
