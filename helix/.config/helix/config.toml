@@ -31,7 +31,7 @@ character = "┊"
 
 [keys.normal]
 esc = "collapse_selection"
-D = "kill_to_line_end"
+D = "kill_to_line_end" # Make this yank first?
 C = ["extend_to_line_end", "change_selection"] 
 C-c = "copy_selection_on_next_line"
 "K" = "hover"
