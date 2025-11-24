@@ -27,6 +27,7 @@ character = "┊"
 
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
+"t" = [":toggle-option lsp.display-inlay-hints"]
 
 [keys.normal]
 esc = "collapse_selection"
