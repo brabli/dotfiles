@@ -1,27 +1,36 @@
 #!/bin/bash
 
-tmp=$(mktemp)
-cat >"$tmp"
+# exec 2>&1 # Redirect stderr to stdout
+# set -x    # Print debugging info
 
+# Create a tmp file and populate it with the input from stdin (IE the contents to format).
+tmp=$(mktemp)
+cat >"$tmp" # Send stdin to tmp
+
+# Format the contents in tmp in place
 "$1/app/vendor/bin/php-cs-fixer" --config="$1/app/.php-cs-fixer.dist.php" fix "$tmp" --quiet --allow-risky=yes
 
 content=$(cat "$tmp")
 
+# Add ending newline if one does not exist. For some reason this is not working in php-cs-fixer.
 last_letter="${content: -1}"
 
 if [[ "$last_letter" != $'\n' ]]; then
-
+    # Linux
     if [ "$OSTYPE" = "linux-gnu" ]; then
         sed -i -e '$a\\' "$tmp"
     fi
 
+    # macOS
     if [ "$OSTYPE" = "darwin24" ]; then
         sed -i '' -e '$a\
 ' "$tmp" # Intentional formatting
     fi
 fi
 
+# Output formatted content to stdout
 cat "$tmp"
-rm "$tmp"
 
+# We gucci
+rm "$tmp"
 exit 0
