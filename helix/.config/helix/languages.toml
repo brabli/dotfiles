@@ -10,7 +10,7 @@ language-servers = ["vscode-html-language-server", "emmet-ls"]
 
 [[language]]
 name = "php"
-formatter = { command = "php-cs-fixer-wrapper", args = ["/Users/bradley/work_projects/inscyte-crm"] }
+formatter = { command = "php-cs-fixer-wrapper", args = ["%{current_working_directory}"] }
 auto-format = true
 
 [[language]]
