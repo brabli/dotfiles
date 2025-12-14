@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Merge to Develop and Delete
+# [M]erge to [D]evelop and [D]elete
 
 BRANCH=$(git branch --show-current)
 
