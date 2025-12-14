@@ -6,10 +6,10 @@ BRANCH=$(git branch --show-current)
 
 if [ "$BRANCH" == "develop" ] || [ "$BRANCH" == 'master' ] || [ "$BRANCH" == 'main' ]; then
     echo "You are on branch \"$BRANCH\", aborting!" >&2
-    exit 1;
-fi;
+    exit 1
+fi
 
-git checkout develop && \
-git merge "$BRANCH" && \
-git branch -d "$BRANCH" && \
-git push
+git checkout develop &&
+    git merge "$BRANCH" &&
+    git branch -d "$BRANCH" &&
+    git push
