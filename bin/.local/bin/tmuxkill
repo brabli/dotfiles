@@ -1,10 +1,8 @@
 #!/bin/bash
 
 if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    echo "Usage: ${0##*/} [options]"
-    echo ""
+    echo "Usage: ${0##*/} [OPTIONS...]"
     echo "Kill all running tmux sessions."
-    echo ""
     echo "Options:"
     echo "    -h, --help       Display this help message and exit."
     exit 0
