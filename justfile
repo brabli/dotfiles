@@ -1,3 +1,6 @@
+green := "\033[32m"
+reset := "\033[0m\n"
+
 call_recipe := just_executable() + " --justfile=" + justfile()
 
 _default:
@@ -22,9 +25,9 @@ list:
 stow-all:
     @{{ call_recipe }} list | xargs stow --adopt
     @git reset --hard
-    @echo All config files have been stowed.
+    @printf "{{green}}All config files have been stowed.{{reset}}"
 
 [doc("Unstow all directories as listed by `list`")]
 unstow-all:
     @{{ call_recipe }} list | xargs stow -D
-    @echo All config files have been unstowed.
+    @printf "{{green}}All config files have been unstowed.{{reset}}"
