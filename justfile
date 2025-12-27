@@ -1,5 +1,5 @@
-green := "\033[32m"
-reset := "\033[0m\n"
+green := "\\033[32m"
+reset := "\\033[0m\n"
 
 call_recipe := just_executable() + " --justfile=" + justfile()
 
