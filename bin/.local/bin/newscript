@@ -27,17 +27,18 @@ while [ -z "$SCRIPT_NAME" ]; do
     fi
 done
 
-# Perhaps some validation code here?
-#
-
 SCRIPT_PATH=$XDG_BIN_HOME/$SCRIPT_NAME
 
 sudo touch "$SCRIPT_PATH" &>/dev/null
 sudo chmod 777 "$SCRIPT_PATH"
 
-echo "#!/bin/bash" >>"$SCRIPT_PATH"
-echo "echo \"$SCRIPT_PATH is running!\"" >>"$SCRIPT_PATH"
-echo "Successfully created a new script $SCRIPT_NAME at $SCRIPT_PATH." >&2
+{
+    printf "#!/bin/bash\n\n"
+    printf "set -e\n\n"
+    printf "echo \"%s is running!\"\n\n" "$SCRIPT_PATH"
+} >>"$SCRIPT_PATH"
+
+printf "Successfully created a new script \"%s\" at \"%s\".\n" "$SCRIPT_NAME" "$SCRIPT_PATH" >&2
 
 if [ -n "${EDITOR+x}" ]; then
     $EDITOR "$SCRIPT_PATH"
