@@ -1,0 +1,65 @@
+#!/bin/bash
+
+set -e
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "Usage: $(basename "$0") [OPTIONS] <PROCESS_NAME>"
+    echo "Find and quit processes by name."
+    echo "Options:"
+    echo "  -h, --help    Show this help message and exit"
+    exit 0
+fi
+
+if [ -z "$1" ]; then
+    printf "You must pass in a program name to search for.\n"
+    exit 0
+fi
+
+function ok {
+    local TEXT="$1"
+    printf "\033[32m[OK] %s\033[0m\n" "$TEXT"
+}
+
+function info {
+    local TEXT="$1"
+    printf "\033[34m[INFO] %s\033[0m\n" "$TEXT"
+}
+
+function warn {
+    local TEXT="$1"
+    printf "\033[33m[WARN] %s\033[0m\n" "$TEXT"
+}
+
+TERM="$1"
+
+RUNNING_PROCS=$(pgrep -il "$TERM")
+
+NUM_PROCS=$(echo "$RUNNING_PROCS" | wc -l | awk '{print $1}')
+
+info "Found $NUM_PROCS running processes that match \"$TERM\"."
+printf "%s\n" "$RUNNING_PROCS"
+
+while IFS= read -r PROC; do
+    PID=$(echo "$PROC" | awk '{print $1}')
+    NAME=$(echo "$PROC" | awk '{print $2}') # Doesn't work with "Docker Desktop" for example
+
+    if ! ps -p "$PID" >/dev/null; then
+        info "Process $PID no longer found."
+        continue
+    fi
+
+    printf "Kill %s? [Y/n] " "$NAME"
+    read -r ANS </dev/tty # Stops read from reading the while loop's input stream, or something
+
+    if [[ "$ANS" =~ ^[Nn]$ ]]; then
+        ok "Skipping $PID."
+        continue
+    else
+        if ps -p "$PID" >/dev/null; then
+            sudo kill "$PID"
+            ok "Killed $PID."
+        else
+            warn "Process $PID no longer found."
+        fi
+    fi
+done <<<"$RUNNING_PROCS"
