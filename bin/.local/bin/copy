@@ -9,6 +9,9 @@ case "$OS" in
 "Darwin")
     printf "%s" "$INPUT" | pbcopy
     ;;
+"Linux")
+    printf "%s" "$INPUT" | wl-copy
+    ;;
 *)
     echo "Unknown OS: $OS"
     ;;
