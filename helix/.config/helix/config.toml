@@ -30,6 +30,8 @@ character = "┊"
 "t" = [":toggle-option lsp.display-inlay-hints"]
 
 [keys.normal]
+"*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+# "C-*" = ["move_prev_word_start", "move_prev_word_end", "search_selection", "search_prev", "search_prev"]
 esc = "collapse_selection"
 D = "kill_to_line_end" # Make this yank first?
 C = ["extend_to_line_end", "change_selection"] 
