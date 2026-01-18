@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 USAGE="Usage: $(basename "$0") [OPTIONS]
 
 Prune some docker resources without removing things you actually need.
