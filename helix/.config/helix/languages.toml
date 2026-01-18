@@ -29,6 +29,10 @@ name = "yaml"
 file-types = ["yaml", "yml", "yml.dist", "yaml.dist", "neon", "neon.dist"]
 
 [[language]]
+name = "ini"
+file-types = ["conf"]
+
+[[language]]
 name = "javascript"
 language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
 auto-format = true
