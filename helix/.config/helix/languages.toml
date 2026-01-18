@@ -73,9 +73,7 @@ command = "tailwindcss-language-server"
 args = ["--stdio"]
 
 [language-server.biome]
-# command =  "./node_modules/@biomejs/cli-darwin-x64/biome" # This will break other stuff in future
-# args = ["lsp-proxy"]
-command =  "npx" # This will break other stuff in future
+command =  "npx"
 args = ["@biomejs/biome", "lsp-proxy"]
 
 # Allow `!php/const` in yaml files without the LSP crying
