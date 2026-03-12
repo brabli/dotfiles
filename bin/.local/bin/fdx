@@ -29,7 +29,7 @@ for ARG in "$@"; do
     REGEX="${REGEX}${ARG}.*"
 done
 
-RESULT=$(fd -u -p -t f "$REGEX")
+RESULT=$(fd -1 -u -p -t f "$REGEX")
 
 if [ -z "$RESULT" ]; then
     echo -e "\033[31mNo files found.\033[0m" >&2
