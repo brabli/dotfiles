@@ -1,10 +1,33 @@
 #!/bin/bash
 
-if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    echo "Usage: ${0##*/} [OPTIONS...]"
-    echo "Kill all running tmux sessions."
-    echo "Options:"
-    echo "    -h, --help       Display this help message and exit."
+RESTART=false
+
+for arg in "$@"; do
+    case "$arg" in
+    -h | --help)
+        echo "Usage: ${0##*/} [OPTIONS...]"
+        echo "Kill all running tmux sessions."
+        echo "Options:"
+        echo "    -h, --help       Display this help message and exit."
+        echo "    -r, --restart    Start a new tmux session after killing all existing ones."
+        exit 0
+        ;;
+    -r | --restart)
+        RESTART=true
+        ;;
+    esac
+done
+
+if $RESTART; then
+    NEW_SESSION=$(tmux new-session -d -P -F '#{session_name}')
+
+    if [ -n "$TMUX" ]; then
+        tmux switch-client -t "$NEW_SESSION"
+        tmux kill-session -a -t "$NEW_SESSION" # Kill all except target
+    else
+        tmux kill-session -a -t "$NEW_SESSION"
+        tmux attach-session -t "$NEW_SESSION"
+    fi
     exit 0
 fi
 
