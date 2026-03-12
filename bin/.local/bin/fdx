@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    cat <<'EOF'
+Usage: fdx <PATTERN_SEGMENT> [ADDITIONAL_SEGMENTS...]
+
+Finds the first matching file and opens it for editing in Helix.
+
+Each argument is combined to form a regex which is then used to search for the first matching file.
+EG:
+  fdx gho conf -> ghostty/.config/ghostty/config
+
+Options:
+  -h, --help      Show this help message and exit
+EOF
+    exit 0
+fi
+
+if [ $# -lt 1 ]; then
+    echo "Usage: fdx <PATTERN_SEGMENT> [ADDITIONAL_SEGMENTS...]" >&2
+    exit 1
+fi
+
+# Build regex by joining args with .*
+REGEX=".*"
+for ARG in "$@"; do
+    REGEX="${REGEX}${ARG}.*"
+done
+
+RESULT=$(fd -u -p -t f "$REGEX")
+
+if [ -z "$RESULT" ]; then
+    echo -e "\033[31mNo files found.\033[0m" >&2
+    exit 1
+fi
+
+echo "$RESULT" | xargs hx
