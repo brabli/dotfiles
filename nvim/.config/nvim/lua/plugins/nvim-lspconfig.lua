@@ -241,7 +241,7 @@ return {
       vim.lsp.config("twiggy_language_server", {
          settings = {
             twiggy = {
-               framwork = "symfony",
+               framework = "symfony",
             },
          },
       })
