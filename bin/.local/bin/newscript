@@ -29,8 +29,8 @@ done
 
 SCRIPT_PATH=$XDG_BIN_HOME/$SCRIPT_NAME
 
-sudo touch "$SCRIPT_PATH" &>/dev/null
-sudo chmod 777 "$SCRIPT_PATH"
+touch "$SCRIPT_PATH"
+chmod 755 "$SCRIPT_PATH"
 
 {
     printf "#!/bin/bash\n\n"
