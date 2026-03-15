@@ -4,9 +4,9 @@
 function get_cleanup_dir() {
     if [[ $1 == "" ]]
     then
-        if [[ -d /Users/bradley/Desktop ]]
+        if [[ -d "$HOME/Desktop" ]]
         then
-            echo "/Users/bradley/Desktop"
+            echo "$HOME/Desktop"
         else
             echo "/desktop"
         fi
