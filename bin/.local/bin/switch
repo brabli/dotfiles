@@ -10,7 +10,7 @@ function unlink_php_versions() {
 
 function switch_php_version() {
     # Default vars for quick changing
-    settings_json="/Users/bradley/Library/Application Support/Code/User/settings.json"
+    settings_json="$HOME/Library/Application Support/Code/User/settings.json"
     php_version="7.1"
 
     case "$1" in
