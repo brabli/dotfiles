@@ -27,23 +27,19 @@ function echo_green() {
     local GREEN=$(tput setaf 2)
     local RESET=$(tput sgr0)
 
-    local OUTPUT=$(printf "%s%s%s\n" "$GREEN" "$(trim $TEXT)" "$RESET");
+    local OUTPUT=$(printf "%s%s%s\n" "$GREEN" "$(trim $TEXT)" "$RESET")
     echo $OUTPUT
 }
 
-NUM_RUNNING_CONTAINERS=$(docker ps -q | wc -l);
+NUM_RUNNING_CONTAINERS=$(docker ps -q | wc -l)
 
 if [ "$NUM_RUNNING_CONTAINERS" -gt "0" ]; then
-    echo_green "$NUM_RUNNING_CONTAINERS running containers found.";
+    echo_green "$NUM_RUNNING_CONTAINERS running containers found."
 else
-    echo_green "No running containers found, nothing to do!";
-    exit 0;
+    echo_green "No running containers found, nothing to do!"
+    exit 0
 fi
 
-for CONTAINER in $(docker ps --format '{{.Names}}')
-do
-    echo "Stopping $CONTAINER...";
-    docker stop $CONTAINER >> /dev/null;
-done
+docker ps --format '{{.Names}}' | parallel -j 0 --line-buffer 'echo "Stopping {}..."; docker stop {} > /dev/null'
 
-echo_green "Done!";
+echo_green "Done!"
