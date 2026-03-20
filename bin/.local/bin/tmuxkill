@@ -23,10 +23,11 @@ if $RESTART; then
 
     if [ -n "$TMUX" ]; then
         tmux switch-client -t "$NEW_SESSION"
-        tmux kill-session -a -t "$NEW_SESSION" # Kill all except target
+        tmux run-shell "tmux kill-session -a -t '$NEW_SESSION'; tmux rename-session -t '$NEW_SESSION' 0"
     else
         tmux kill-session -a -t "$NEW_SESSION"
-        tmux attach-session -t "$NEW_SESSION"
+        tmux rename-session -t "$NEW_SESSION" 0
+        tmux attach-session -t 0
     fi
     exit 0
 fi
