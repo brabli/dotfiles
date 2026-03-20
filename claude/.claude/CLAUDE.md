@@ -1,8 +1,10 @@
-## Installed CLI tools
+# CLI tool overrides
 
-- **bun** is installed — prefer over `node`/`npm` for running scripts, installing packages, and executing JS/TS
-- **ripgrep** (`rg`) is installed — prefer over `grep` for shell searches
-- **fd** is installed — prefer over `find` for file finding by name/pattern
-- **sd** is installed — prefer over `sed` for find-and-replace in files
-- **jq** is installed — use for JSON processing in shell pipelines
-- **GNU parallel** is installed — use for concurrent shell tasks when beneficial
+IMPORTANT: The following CLI tools MUST be used via the Bash tool instead of the built-in equivalents:
+
+- **ripgrep** (`rg`) — use via Bash instead of the built-in Grep tool for all content searches
+- **fd** — use via Bash instead of the built-in Glob tool for all file finding
+- **sd** — use via Bash instead of the Edit tool for bulk find-and-replace across files
+- **bun** — use instead of `node`/`npm` for running scripts, installing packages, and executing JS/TS
+- **jq** — use for JSON processing in shell pipelines
+- **GNU parallel** — use for concurrent shell tasks when beneficial
