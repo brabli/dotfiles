@@ -11,8 +11,18 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 fi
 
 if [ -z "$TMUX" ]; then
-    echo "Error: tmuxinit must be run inside a tmux session." >&2
-    exit 1
+    read -r -p "You are not inside a tmux session. Start a new one? [y/N] " response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            tmux new-session -d -s 0
+            tmux send-keys -t 0 "$0" Enter
+            exec tmux attach-session -t 0
+            ;;
+        *)
+            echo "Aborted." >&2
+            exit 1
+            ;;
+    esac
 fi
 
 tmux send-keys "hx" Enter
