@@ -36,21 +36,25 @@ file-types = ["conf"]
 name = "javascript"
 language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
 auto-format = true
+roots = ["biome.json", "package.json", "tsconfig.json"]
 
 [[language]]
 name = "typescript"
 language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
 auto-format = true
+roots = ["biome.json", "package.json", "tsconfig.json"]
 
 [[language]]
 name = "tsx"
 auto-format = true
 language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+roots = ["biome.json", "package.json", "tsconfig.json"]
 
 [[language]]
 name = "jsx"
 auto-format = true
 language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+roots = ["biome.json", "package.json", "tsconfig.json"]
 
 [[language]]
 name = "json"
