@@ -7,7 +7,7 @@ middle-click-paste = false
 cursorline = true
 
 [editor.lsp]
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor.cursor-shape]
 insert = "bar"
