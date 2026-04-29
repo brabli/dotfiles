@@ -2,3 +2,5 @@
 show_hidden = true
 ratio = [2, 3, 3]
 image_delay = 500
+sort_by = "natural"
+linemode = "size"
