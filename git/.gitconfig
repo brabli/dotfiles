@@ -11,3 +11,4 @@
 	c = checkout
 	s = stash
 	sp = stash pop
+	t = tag
