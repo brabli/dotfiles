@@ -14,9 +14,9 @@ if [ -z "$TMUX" ]; then
     read -r -p "You are not inside a tmux session. Start a new one? [y/N] " response
     case "$response" in
         [yY][eE][sS]|[yY])
-            tmux new-session -d -s 0
-            tmux send-keys -t 0 "$0" Enter
-            exec tmux attach-session -t 0
+            session=$(tmux new-session -d -P)
+            tmux send-keys -t "$session" "$0" Enter
+            exec tmux attach-session -t "$session"
             ;;
         *)
             echo "Aborted." >&2
