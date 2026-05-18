@@ -15,12 +15,12 @@ desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
 on = "f"
-run = "search --via fd"
+run = "search --via=fd"
 desc = "Find files with `fd`"
 
 [[mgr.prepend_keymap]]
 on = "s"
-run = "search --via rg"
+run = "search --via=rg"
 desc = "Find files with `rg`"
 
 [[mgr.prepend_keymap]]
