@@ -60,6 +60,10 @@ roots = ["biome.json", "package.json", "tsconfig.json"]
 name = "json"
 language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
 
+[[language]]
+name = "markdown"
+language-servers = ["mdpls"]
+
 ##############################
 #######   LSP config   #######
 ##############################
@@ -85,4 +89,8 @@ args = ["@biomejs/biome", "lsp-proxy"]
 # Allow `!php/const` in yaml files without the LSP crying
 [language-server.yaml-language-server.config]
 yaml.customTags = ["!php/const scalar", "!php/enum scalar"]
+
+[language-server.mdpls]
+command = "mdpls"
+config = { markdown.preview.auto = false, markdown.preview.browser = 'firefox' }
 

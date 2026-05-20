@@ -29,6 +29,10 @@ character = "┊"
 "." = "file_picker_in_current_buffer_directory"
 "t" = [":toggle-option lsp.display-inlay-hints"]
 
+# Open markdown preview using mdpls
+[keys.normal."+"]
+p = [":lsp-workspace-command 'Open Preview'"]
+
 [keys.normal]
 "0" = "goto_line_start"
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
