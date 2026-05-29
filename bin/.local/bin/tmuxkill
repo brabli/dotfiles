@@ -1,6 +1,7 @@
 #!/bin/bash
 
 RESTART=false
+SWITCH=false
 
 for arg in "$@"; do
     case "$arg" in
@@ -10,13 +11,38 @@ for arg in "$@"; do
         echo "Options:"
         echo "    -h, --help       Display this help message and exit."
         echo "    -r, --restart    Start a new tmux session after killing all existing ones."
+        echo "    -s, --switch     Kill the current session and switch to an existing one."
         exit 0
         ;;
     -r | --restart)
         RESTART=true
         ;;
+    -s | --switch)
+        SWITCH=true
+        ;;
     esac
 done
+
+if $SWITCH; then
+    if [ -z "$TMUX" ]; then
+        echo "Error: --switch requires an active tmux session." >&2
+        exit 1
+    fi
+
+    CURRENT=$(tmux display-message -p '#{session_name}')
+    OTHER_SESSIONS=$(tmux ls -F '#{session_name}' | grep -v "^${CURRENT}$")
+
+    if [ -z "$OTHER_SESSIONS" ]; then
+        echo "Error: No other tmux sessions to switch to." >&2
+        exit 1
+    fi
+
+    TARGET=$(echo "$OTHER_SESSIONS" | head -n 1)
+
+    tmux switch-client -t "$TARGET"
+    tmux kill-session -t "$CURRENT"
+    exit 0
+fi
 
 if $RESTART; then
     NEW_SESSION=$(tmux new-session -d -P -F '#{session_name}')
@@ -32,4 +58,9 @@ if $RESTART; then
     exit 0
 fi
 
-tmux ls -F '#{session_name}' | xargs -n 1 tmux kill-session -t
+if [ -n "$TMUX" ]; then
+    tmux kill-session -a
+    tmux kill-session
+else
+    tmux kill-server
+fi

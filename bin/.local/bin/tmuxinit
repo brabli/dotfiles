@@ -11,18 +11,29 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 fi
 
 if [ -z "$TMUX" ]; then
-    read -r -p "You are not inside a tmux session. Start a new one? [y/N] " response
-    case "$response" in
-        [yY][eE][sS]|[yY])
-            session=$(tmux new-session -d -P)
-            tmux send-keys -t "$session" "$0" Enter
-            exec tmux attach-session -t "$session"
-            ;;
-        *)
-            echo "Aborted." >&2
+    BASE="$(basename "$PWD")"
+    SESSION="$BASE"
+    n=1
+    while tmux has-session -t "$SESSION" 2>/dev/null; do
+        n=$((n + 1))
+        if [ "$n" -gt 10 ]; then
+            echo "Error: too many sessions named '${BASE}*'." >&2
             exit 1
-            ;;
-    esac
+        fi
+        SESSION="${BASE}${n}"
+    done
+    W1=$(tmux new-session -d -s "$SESSION" -P -F '#{window_id}')
+    tmux send-keys -t "$W1" "hx" Enter
+    W2=$(tmux new-window -t "$SESSION" -P -F '#{window_id}')
+    tmux split-window -v -t "$W2"
+    tmux split-window -h -t "$W2"
+    tmux select-pane -t "$W2.{top-left}"
+    W3=$(tmux new-window -t "$SESSION" -P -F '#{window_id}')
+    tmux send-keys -t "$W3" "claude" Enter
+    W4=$(tmux new-window -t "$SESSION" -P -F '#{window_id}')
+    tmux send-keys -t "$W4" "lg" Enter
+    tmux select-window -t "$W1"
+    exec tmux attach-session -t "$SESSION"
 fi
 
 tmux send-keys "hx" Enter
