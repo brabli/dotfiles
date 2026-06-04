@@ -35,12 +35,11 @@ p = [":lsp-workspace-command 'Open Preview'"]
 
 [keys.normal]
 "0" = "goto_line_start"
-# "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
-# "C-*" = ["move_prev_word_start", "move_prev_word_end", "search_selection", "search_prev", "search_prev"]
 esc = "collapse_selection"
 D = "kill_to_line_end" # Make this yank first?
 C = ["extend_to_line_end", "change_selection"] 
 C-c = "copy_selection_on_next_line"
+# "C-;" = "flip_selections" # Cool this doesn't work with tmux
 "K" = "hover"
 "C-r" = "redo"
 "-" = [
