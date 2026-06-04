@@ -35,7 +35,7 @@ p = [":lsp-workspace-command 'Open Preview'"]
 
 [keys.normal]
 "0" = "goto_line_start"
-"*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+# "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 # "C-*" = ["move_prev_word_start", "move_prev_word_end", "search_selection", "search_prev", "search_prev"]
 esc = "collapse_selection"
 D = "kill_to_line_end" # Make this yank first?
