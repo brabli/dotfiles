@@ -62,7 +62,7 @@ language-servers = [ { name = "vscode-json-language-server", except-features = [
 
 [[language]]
 name = "markdown"
-language-servers = ["mdpls"]
+language-servers = ["marksman", "mpls"]
 
 ##############################
 #######   LSP config   #######
@@ -90,7 +90,6 @@ args = ["@biomejs/biome", "lsp-proxy"]
 [language-server.yaml-language-server.config]
 yaml.customTags = ["!php/const scalar", "!php/enum scalar"]
 
-[language-server.mdpls]
-command = "mdpls"
-config = { markdown.preview.auto = false, markdown.preview.browser = 'firefox' }
-
+[language-server.mpls]
+command = "mpls"
+args = ["--theme", "catppuccin-mocha", "--enable-emoji", "--browser", "firefox", "--no-auto", "--full-sync"]
