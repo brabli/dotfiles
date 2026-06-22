@@ -2,12 +2,20 @@
 
 set -e
 
+FORCE=false
+
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     echo "Usage: $(basename "$0") [OPTIONS] <PROCESS_NAME>"
     echo "Find and quit processes by name."
     echo "Options:"
     echo "  -h, --help    Show this help message and exit"
+    echo "  -f, --force   Force kill using SIGKILL (kill -9)"
     exit 0
+fi
+
+if [ "$1" = "-f" ] || [ "$1" = "--force" ]; then
+    FORCE=true
+    shift
 fi
 
 if [ -z "$1" ]; then
@@ -56,7 +64,11 @@ while IFS= read -r PROC; do
         continue
     else
         if ps -p "$PID" >/dev/null; then
-            sudo kill "$PID"
+            if [ "$FORCE" = true ]; then
+                sudo kill -9 "$PID"
+            else
+                sudo kill "$PID"
+            fi
             ok "Killed $PID."
         else
             warn "Process $PID no longer found."
