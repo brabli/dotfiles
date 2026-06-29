@@ -1,6 +1,6 @@
 ---
 description: Provides guidelines and instructions on how to write clean, consistent Stimulus JS code.
-when_to_use: Whenever a JavaScript or TypeScript Stimulus class file is modified
+when_to_use: Whenever a JavaScript or TypeScript Stimulus class file is modified, or when a new JS/TS feature is being requested within an app that uses Stimulus.
 ---
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
@@ -16,4 +16,13 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
     - `getThing()` instead of `thing()` when getting an object.
     - `tryGetThing()` if getting the thing could fail.
     - `fetchThing()` if a resource needs to be fetched over the internet.
+- Conditionals MUST NOT use shorthand blocks.
+```ts
+// Bad
+if (someCondition) return true;
 
+// Good
+if (someCondition) {
+    return true;
+}
+```

@@ -1,6 +1,6 @@
 ---
 description: Provides guidelines and instructions on how to write clean, consistent Twig code.
-when_to_use: Whenever a Twig file is modified or examined.
+when_to_use: Whenever a Twig file is created, modified or read. Whenever Stimulus markup is added to a Twig file.
 ---
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).

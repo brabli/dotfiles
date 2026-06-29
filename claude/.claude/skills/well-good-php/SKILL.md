@@ -1,6 +1,6 @@
 ---
 description: Provides instructions on how to write clean and maintainable PHP code.
-when_to_use: Whenever a PHP file is read or edited.
+when_to_use: Whenever a PHP file is created, read or modified.
 ---
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
@@ -21,6 +21,14 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 - Built-in functions and constants MUST be prefixed with a backslash `\`.
 - PHP code SHOULD be self-documenting.
 - PHP code SHOULD read like well-written prose.
+- "Yoda-conditions" MUST be used.
+```php
+// Bad
+if ($var === null) {...}
+
+// Good
+if (null === $var) {...}
+```
 - PHP 8.4+ code MUST NOT wrap "new" instances in parenthesis.
 ```php
 // Pre PHP 8.4
@@ -28,4 +36,14 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 // Post PHP 8.4
 new Object()->someMethod()
+```
+- Return statements MUST be a single value or variable.
+```php
+// Bad
+return $var->someMethod()->anotherMethod();
+
+// Good
+$val = $var->someMethod()->anotherMethod();
+
+return $val;
 ```
