@@ -67,8 +67,9 @@ language-servers = ["marksman", "mpls"]
 [[language]]
 name = "scheme"
 language-servers = ["steel-language-server"]
-auto-format = true
 formatter = { command = "schemat" }
+auto-format = true
+indent = { tab-width = 4, unit = " " }
 
 ##############################
 #######   LSP config   #######
