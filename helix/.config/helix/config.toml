@@ -5,6 +5,7 @@ line-number = "relative"
 color-modes = true
 middle-click-paste = false
 cursorline = true
+rainbow-brackets = true
 
 [editor.lsp]
 display-inlay-hints = false
