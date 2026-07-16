@@ -1,6 +1,6 @@
 ---
-description: Provides instructions on how to write clean and maintainable PHP code.
-when_to_use: Whenever a PHP file is created, read or modified.
+description: Coding standards for writing clean, maintainable PHP in this codebase.
+when_to_use: Use whenever you are about to create, edit, review, or read a .php file - entities, controllers, services, subscribers, voters, tests, or any other PHP. Invoke this BEFORE writing or changing PHP so the code follows the standards on the first pass rather than needing rework.
 ---
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).

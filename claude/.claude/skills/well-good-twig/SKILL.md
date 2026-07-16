@@ -1,6 +1,6 @@
 ---
-description: Provides guidelines and instructions on how to write clean, consistent Twig code.
-when_to_use: Whenever a Twig file is created, modified or read. Whenever Stimulus markup is added to a Twig file.
+description: Coding standards for writing clean, lightweight, consistent Twig templates and components.
+when_to_use: Use whenever you are about to create, edit, review, or read a .twig template or Twig component, or add Stimulus markup to Twig. Invoke this BEFORE writing or changing Twig so templates stay lightweight and follow the coding standards on the first pass.
 ---
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
