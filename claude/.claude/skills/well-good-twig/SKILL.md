@@ -7,14 +7,13 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ### MUST
 - Twig code MUST follow the [coding standards](https://twig.symfony.com/doc/3.x/coding_standards.html#coding-standards).
-- Twig files MUST aim to be as lightweight as possible.
+- Twig files MUST be as lightweight as possible.
 - Stimulus helper functions (`stimulus_controller()`, `stimulus_target()`, `stimulus_action()`) MUST be used instead of writing raw `data-controller`/`data-target`/`data-action` attributes.
 - Complex logic MUST be offloaded to PHP instead of being run inside the Twig template. Examples of where to add complex logic inclue:
     - Custom Twig filters
     - Custom Twig functions
     - Services
     - DTO/Models
-
     When extracting logic out of a template, pick the layer that fits:
     - Entity methods for derived properties (`user.fullName` instead of `{{ user.firstName ~ ' ' ~ user.lastName }}`).
     - Twig extensions/functions for presentation-layer formatting that doesn't belong on an entity.
