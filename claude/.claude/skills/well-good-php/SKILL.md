@@ -51,3 +51,32 @@ new Object()->someMethod()
     - Instances where treating a variable as immutable would result in significant performance penalties.
 - PHP code SHOULD be self-documenting.
 - PHP code SHOULD read like well-written prose.
+
+### SHOULD NOT
+- Flag variables SHOULD NOT be used.
+```php
+// Bad - Flag exists
+$flag = false;
+
+foreach ($entities as $entity) {
+    // ...
+    if ($something) {
+        $flag = true;
+    }
+}
+
+if ($flag) {
+    // Logic
+}
+
+
+// Good - No flag
+
+foreach ($entities as $entity) {
+    // ...
+    if ($something) {
+        // Logic
+    }
+}
+
+```
