@@ -1,8 +1,12 @@
+onboarding = false
+
 [theme]
-name = "catppuccin-mocha"
+name = "rose-pine"
 
 [keys]
 prefix = "ctrl+s"
+rename_tab = "prefix+r"
+rename_workspace = "prefix+R"
 navigate_workspace_up = "k"
 navigate_workspace_down = "j"
 reload_config = "prefix+comma"
@@ -13,7 +17,3 @@ prompt_new_tab_name = false
 [ui.sidebar.agents]
 rows = [["state_icon", "workspace", "tab"]]
 row_gap = 1
-
-[theme.custom]
-surface_dim = "#313244" # Temp fix
-
