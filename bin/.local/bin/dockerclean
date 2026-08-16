@@ -1,30 +1,172 @@
 #!/bin/bash
 
+set -euo pipefail
+
 USAGE="Usage: $(basename "$0") [OPTIONS]
 
-Prune some docker resources without removing things you actually need.
+Reclaim disk space used by docker.
+
+By default this removes stopped containers, dangling images, the build cache
+and unused networks. Named volumes and tagged images are left alone, so
+nothing you would have to re-pull or re-seed is touched.
 
 Options:
+  -a, --all      Also remove all unused images and all unused volumes.
+                 Prompts for confirmation. Named volumes hold database
+                 data, so this can destroy work.
   -h, --help     Show this help message and exit
 
 Examples:
   $(basename "$0")
+  $(basename "$0") --all
 "
 
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    echo "$USAGE"
-    exit 0
+ALL=false
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+    -h | --help)
+        echo "$USAGE"
+        exit 0
+        ;;
+    -a | --all)
+        ALL=true
+        shift
+        ;;
+    *)
+        printf 'Unknown option: %s\n\n%s\n' "$1" "$USAGE" >&2
+        exit 1
+        ;;
+    esac
+done
+
+if [ -t 1 ]; then
+    BOLD=$(tput bold 2>/dev/null || true)
+    GREEN=$(tput setaf 2 2>/dev/null || true)
+    YELLOW=$(tput setaf 3 2>/dev/null || true)
+    RED=$(tput setaf 1 2>/dev/null || true)
+    RESET=$(tput sgr0 2>/dev/null || true)
+else
+    BOLD="" GREEN="" YELLOW="" RED="" RESET=""
 fi
 
-docker image prune -f
-docker image prune -a -f
-docker volume prune -f
-
-NUM_ORPHANS=$(docker images -f dangling=true -q | wc -l)
-
-if [ "$NUM_ORPHANS" -gt 0 ]; then
-    echo "Removing $NUM_ORPHANS orphans."
-    docker rmi -f "$(docker images -f dangling=true -q)"
+if ! command -v docker >/dev/null 2>&1; then
+    printf '%sdocker was not found on your PATH.%s\n' "$RED" "$RESET" >&2
+    exit 1
 fi
 
-echo "Done."
+if ! docker info >/dev/null 2>&1; then
+    printf "%sCan't reach the docker daemon. Is docker running?%s\n" "$RED" "$RESET" >&2
+    exit 1
+fi
+
+# $1 = string, a docker size such as "1.021GB" or "0B"
+function to_bytes() {
+    awk -v size="$1" 'BEGIN {
+        if (!match(size, /[0-9.]+/)) { print 0; exit }
+        number = substr(size, RSTART, RLENGTH)
+        unit = substr(size, RSTART + RLENGTH)
+        gsub(/[^A-Za-z]/, "", unit)
+        multiplier["B"] = 1
+        multiplier["kB"] = 1000
+        multiplier["MB"] = 1000000
+        multiplier["GB"] = 1000000000
+        multiplier["TB"] = 1000000000000
+        multiplier["PB"] = 1000000000000000
+        printf "%d\n", number * (unit in multiplier ? multiplier[unit] : 1)
+    }'
+}
+
+# $1 = integer, a number of bytes
+function to_human() {
+    awk -v bytes="$1" 'BEGIN {
+        split("B kB MB GB TB PB", units, " ")
+        index_ = 1
+        while (bytes >= 1000 && index_ < 6) {
+            bytes /= 1000
+            index_++
+        }
+        if (index_ == 1) printf "%dB\n", bytes
+        else printf "%.2f%s\n", bytes, units[index_]
+    }'
+}
+
+TOTAL_BYTES=0
+FAILURES=0
+
+# $1 = string, label. $2... = the docker command to run.
+function run_step() {
+    local label=$1
+    shift
+
+    printf '  %-21s ' "$label..."
+
+    local output status
+    set +e
+    output=$("$@" 2>&1)
+    status=$?
+    set -e
+
+    if [ "$status" -ne 0 ]; then
+        printf '%sfailed%s\n' "$RED" "$RESET"
+        printf '%s\n' "$output" | sed 's/^/      /' >&2
+        FAILURES=$((FAILURES + 1))
+        return 0
+    fi
+
+    # Both "Total reclaimed space: 1.021GB" and builder prune's "Total: 1.021GB".
+    local reclaimed
+    reclaimed=$(printf '%s\n' "$output" | awk -F: '
+        /^Total reclaimed space:|^Total:/ { value = $2 }
+        END { gsub(/^[ \t]+|[ \t]+$/, "", value); print value }
+    ')
+
+    if [ -z "$reclaimed" ]; then
+        printf '%sdone%s\n' "$GREEN" "$RESET"
+        return 0
+    fi
+
+    local bytes
+    bytes=$(to_bytes "$reclaimed")
+    TOTAL_BYTES=$((TOTAL_BYTES + bytes))
+    printf '%s%s%s\n' "$GREEN" "$(to_human "$bytes")" "$RESET"
+}
+
+if [ "$ALL" = true ]; then
+    printf '%s--all will additionally remove:%s\n' "$YELLOW" "$RESET"
+    printf '  - every image not used by a container, not just dangling ones\n'
+    printf '  - every unused volume, including named ones (database data lives here)\n\n'
+
+    if [ ! -t 0 ]; then
+        printf '%sRefusing to run --all without an interactive terminal.%s\n' "$RED" "$RESET" >&2
+        exit 1
+    fi
+
+    read -r -p "Continue? [y/N] " REPLY
+    case "$REPLY" in
+    [yY] | [yY][eE][sS]) printf '\n' ;;
+    *)
+        echo "Aborted."
+        exit 0
+        ;;
+    esac
+fi
+
+printf '%sPruning docker resources%s\n' "$BOLD" "$RESET"
+
+run_step "Stopped containers" docker container prune -f
+run_step "Dangling images" docker image prune -f
+run_step "Build cache" docker builder prune -f
+run_step "Unused networks" docker network prune -f
+
+if [ "$ALL" = true ]; then
+    run_step "Unused images" docker image prune -a -f
+    run_step "Unused volumes" docker volume prune -a -f
+fi
+
+printf '\n%sReclaimed %s.%s\n' "$GREEN" "$(to_human "$TOTAL_BYTES")" "$RESET"
+
+if [ "$FAILURES" -gt 0 ]; then
+    printf '%s%d step(s) failed, see above.%s\n' "$YELLOW" "$FAILURES" "$RESET" >&2
+    exit 1
+fi
