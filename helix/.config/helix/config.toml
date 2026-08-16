@@ -23,6 +23,9 @@ max-indent-retain = 999
 render = true
 character = "┊"
 
+[editor.whitespace.render]
+newline = "all"
+
 [editor.smart-tab]
 "supersede-menu" = true
 
