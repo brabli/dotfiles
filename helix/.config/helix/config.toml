@@ -34,10 +34,10 @@ C-space = "completion"
 "t" = [":toggle-option lsp.display-inlay-hints"]
 
 [keys.normal."+"]
-# Open markdown preview in browser using `mpls`
-p = [":lsp-workspace-command open-preview"]
-# Git blame for the current line
-b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
+m = [":lsp-workspace-command open-preview"] # Open markdown preview in browser using `mpls`
+p = [":sh open -a Firefox %{buffer_name}"] # Open the current file in Firefox (no live reload)
+b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}" # Git blame for the current line
+d = ":insert-output date +%%F | tr -d '\\n'"
 
 [keys.normal]
 "0" = "goto_line_start"
@@ -45,7 +45,7 @@ esc = "collapse_selection"
 D = "kill_to_line_end" # Make this yank first?
 C = ["extend_to_line_end", "change_selection"] 
 C-c = "copy_selection_on_next_line"
-# "C-;" = "flip_selections" # Cool this doesn't work with tmux
+"C-;" = "flip_selections" # Cool this doesn't work with tmux. UPDATE: Cool this works with herdr
 "K" = "hover"
 "C-r" = "redo"
 "-" = [
