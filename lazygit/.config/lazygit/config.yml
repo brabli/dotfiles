@@ -1,28 +1,33 @@
+# git:
+#   diffRenderers:
+#     - command: difft --color always --display inline --skip-unchanged
+#       type: extDiff
+
 gui:
-    nerdFontsVersion: "3"
-    showRandomTip: false
-    showFileTree: false
-    showListFooter: false
-    showPanelJumps: false
-    filterMode: fuzzy
-    theme:
-        activeBorderColor:
-            - '#4F8FF8'
-            - 'bold'
-        inactiveBorderColor:
-            - '#a6adc8'
-        optionsTextColor:
-            - '#89b4fa'
-        selectedLineBgColor:
-            - '#313244'
-        cherryPickedCommitBgColor:
-            - '#45475a'
-        cherryPickedCommitFgColor:
-            - '#89b4fa'
-        unstagedChangesColor:
-            - '#f38ba8'
-        defaultFgColor:
-            - '#cdd6f4'
-        searchingActiveBorderColor:
-            - '#f9e2af'
+  nerdFontsVersion: "3"
+  showRandomTip: false
+  showFileTree: false
+  showListFooter: false
+  showPanelJumps: false
+  filterMode: fuzzy
+  theme:
+    activeBorderColor:
+      - '#4F8FF8'
+      - 'bold'
+    inactiveBorderColor:
+      - '#a6adc8'
+    optionsTextColor:
+      - '#89b4fa'
+    selectedLineBgColor:
+      - '#313244'
+    cherryPickedCommitBgColor:
+      - '#45475a'
+    cherryPickedCommitFgColor:
+      - '#89b4fa'
+    unstagedChangesColor:
+      - '#f38ba8'
+    defaultFgColor:
+      - '#cdd6f4'
+    searchingActiveBorderColor:
+      - '#f9e2af'
 
