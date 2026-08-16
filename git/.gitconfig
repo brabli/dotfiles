@@ -5,6 +5,10 @@
 	email = 67018167+brabli@users.noreply.github.com
 [init]
 	defaultBranch = main
+
+# [diff]
+#     external = difft --display inline
+
 [alias]
 	b = branch
 	p = pull --rebase
