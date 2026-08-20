@@ -3,5 +3,7 @@ inherits = "rose_pine"
 
 "comment" = { "fg" = "#efe6de", "bg" = "#9a0002", modifiers = ["italic"] }
 
+"diff.delta" = "#f6c177"
+
 "ui.virtual.indent-guide" = { fg = "#403d52" }
 "ui.virtual.whitespace" = { fg = "#403d52" }
