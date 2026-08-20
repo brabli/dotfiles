@@ -24,7 +24,7 @@ render = true
 character = "┊"
 
 [editor.whitespace.render]
-newline = "all"
+newline = "none"
 
 [editor.smart-tab]
 "supersede-menu" = true
