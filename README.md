@@ -17,4 +17,5 @@ Some other programs are required in order to make full use of these dotfiles.
 These tools include but are not necessarily limited to:
 
 - [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
+- [Difftastic](https://github.com/wilfred/difftastic)
 
