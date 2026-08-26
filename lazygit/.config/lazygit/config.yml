@@ -1,7 +1,11 @@
 git:
   diffRenderers:
-    - command: difft --color always --display inline --skip-unchanged
+    - name: inline
       type: extDiff
+      command: difft --color always --display inline --skip-unchanged
+    - name: not inline
+      type: extDiff
+      command: difft --color always --skip-unchanged
 
 gui:
   nerdFontsVersion: "3"
