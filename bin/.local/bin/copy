@@ -1,5 +1,15 @@
 #!/bin/bash
 
+set -euo pipefail
+
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
+    echo "Usage: <COMMAND> | $(basename "$0")"
+    echo "Copy text to the system clipboard"
+    echo "Options:"
+    echo "  -h, --help    Show this help message and exit"
+    exit 0
+fi
+
 # stdin
 INPUT=$(cat)
 
