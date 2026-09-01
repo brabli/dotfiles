@@ -41,6 +41,7 @@ m = [":lsp-workspace-command open-preview"] # Open markdown preview in browser 
 p = [":sh open -a Firefox %{buffer_name}"] # Open the current file in Firefox (no live reload)
 b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}" # Git blame for the current line
 d = ":insert-output date +%%F | tr -d '\\n'"
+P = [":pipe-to echo %{file_path_absolute} | copy", ":echo Copied buffer path %{file_path_absolute}"]
 
 [keys.normal]
 "0" = "goto_line_start"
