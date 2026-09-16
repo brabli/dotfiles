@@ -30,7 +30,7 @@ file-types = ["yaml", "yml", "yml.dist", "yaml.dist", "neon", "neon.dist"]
 
 [[language]]
 name = "ini"
-file-types = ["conf"]
+file-types = ["conf", "ini", { glob = "*.dev.ini" }]
 
 [[language]]
 name = "javascript"
