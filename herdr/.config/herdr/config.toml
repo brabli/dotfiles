@@ -13,8 +13,14 @@ reload_config = "prefix+comma"
 
 [ui]
 prompt_new_tab_name = false
-
 agent_panel_sort = "priority"
+
 [ui.sidebar.agents]
 rows = [["state_icon", "workspace", "tab"]]
 row_gap = 1
+
+[[keys.command]]
+key = "prefix+a"
+type = "plugin_action"
+command = "yxhta.agents-picker.open"
+description = "agents picker"
